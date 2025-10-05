@@ -1,0 +1,151 @@
+// Script de prueba para verificar navegación del panel administrativo
+// Ejecuta este código en la consola del navegador cuando estés en cualquier página del panel administrativo
+
+console.log('🔧 Verificando navegación del panel administrativo...');
+
+// Test 1: Verificar que el objeto admin existe
+if (typeof window.admin !== 'undefined') {
+    console.log('✅ Objeto admin encontrado');
+
+    // Test 2: Verificar métodos de navegación
+    const navigationMethods = ['navigateToSection', 'goToDashboard', 'openPreview', 'switchSection'];
+    let navigationOk = true;
+
+    navigationMethods.forEach(method => {
+        if (typeof window.admin[method] === 'function') {
+            console.log(`✅ Método de navegación ${method} disponible`);
+        } else {
+            console.log(`❌ Método de navegación ${method} no encontrado`);
+            navigationOk = false;
+        }
+    });
+
+    if (navigationOk) {
+        console.log('✅ Todos los métodos de navegación están disponibles');
+    }
+
+    // Test 3: Verificar enlaces del sidebar
+    const navLinks = document.querySelectorAll('.admin-nav .nav-item');
+    console.log(`🔍 Encontrados ${navLinks.length} enlaces de navegación`);
+
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        const section = link.dataset.section;
+
+        if (href && href.endsWith('.html')) {
+            console.log(`✅ Enlace válido: ${section} -> ${href}`);
+        } else {
+            console.log(`❌ Enlace inválido: ${section} -> ${href}`);
+        }
+    });
+
+    // Test 4: Verificar botones del header
+    const headerButtons = document.querySelectorAll('.header-actions .btn');
+    console.log(`🔍 Encontrados ${headerButtons.length} botones en el header`);
+
+    headerButtons.forEach(button => {
+        const onclick = button.onclick?.toString() || 'Sin onclick';
+        if (onclick.includes('admin.')) {
+            console.log(`✅ Botón con método admin: ${onclick.split('admin.')[1]?.split('(')[0] || 'método desconocido'}`);
+        } else {
+            console.log(`⚠️  Botón sin método admin: ${onclick.substring(0, 50)}...`);
+        }
+    });
+
+    // Test 5: Probar navegación programática
+    console.log('🔄 Probando navegación programática...');
+
+    // Probar navegación a diferentes secciones
+    const sectionsToTest = ['dashboard', 'projects', 'messages'];
+
+    sectionsToTest.forEach(section => {
+        if (typeof window.admin.navigateToSection === 'function') {
+            console.log(`✅ Método navigateToSection disponible para sección: ${section}`);
+        }
+    });
+
+    // Test 6: Verificar URLs de archivos
+    const currentPage = window.location.pathname.split('/').pop();
+    console.log(`📄 Página actual: ${currentPage}`);
+
+    const expectedFiles = {
+        'dashboard.html': ['dashboard-section', 'projects-count', 'images-count', 'messages-count'],
+        'projects.html': ['projects-section', 'project-item', 'add-project-btn'],
+        'messages.html': ['messages-section', 'messages-list'],
+        'preview.html': ['preview-section', 'preview-frame'],
+        'content.html': ['content-section', 'content-editor-container'],
+        'navigation.html': ['navigation-section', 'nav-items'],
+        'images.html': ['images-section', 'images-grid'],
+        'settings.html': ['settings-section', 'settings-form'],
+        'backup.html': ['backup-section', 'backup-actions']
+    };
+
+    if (expectedFiles[currentPage]) {
+        console.log(`🔍 Verificando elementos específicos de ${currentPage}...`);
+        expectedFiles[currentPage].forEach(elementId => {
+            if (document.getElementById(elementId) || document.querySelector(`.${elementId}`)) {
+                console.log(`✅ Elemento encontrado: ${elementId}`);
+            } else {
+                console.log(`❌ Elemento no encontrado: ${elementId}`);
+            }
+        });
+    }
+
+} else {
+    console.log('❌ Objeto admin no encontrado. Revisa que el archivo admin.js esté cargado correctamente.');
+}
+
+// Test 7: Verificar elementos comunes del layout
+const commonElements = [
+    '.admin-sidebar',
+    '.admin-main',
+    '.admin-header',
+    '.admin-nav',
+    '.logout-btn'
+];
+
+commonElements.forEach(selector => {
+    if (document.querySelector(selector)) {
+        console.log(`✅ Elemento común encontrado: ${selector}`);
+    } else {
+        console.log(`❌ Elemento común no encontrado: ${selector}`);
+    }
+});
+
+// Test 8: Verificar carga de scripts
+const scripts = document.querySelectorAll('script');
+let scriptsOk = true;
+
+scripts.forEach(script => {
+    const src = script.src;
+    if (src.includes('auth.js') || src.includes('admin.js')) {
+        console.log(`✅ Script cargado: ${src.split('/').pop()}`);
+    }
+});
+
+console.log('🔧 Verificación completada. Revisa la consola para ver todos los resultados.');
+
+// Función helper para probar navegación manualmente
+window.testNavigation = function(section) {
+    console.log(`🧭 Probando navegación a: ${section}`);
+    if (window.admin && window.admin.navigateToSection) {
+        window.admin.navigateToSection(section);
+    } else {
+        console.log('❌ Método navigateToSection no disponible');
+    }
+};
+
+// Función helper para probar dashboard
+window.testDashboard = function() {
+    console.log('🏠 Probando navegación al dashboard...');
+    if (window.admin && window.admin.goToDashboard) {
+        window.admin.goToDashboard();
+    } else {
+        console.log('❌ Método goToDashboard no disponible');
+    }
+};
+
+console.log('💡 Funciones de prueba disponibles:');
+console.log('   - testNavigation("projects") - Probar navegación a proyectos');
+console.log('   - testNavigation("messages") - Probar navegación a mensajes');
+console.log('   - testDashboard() - Probar navegación al dashboard');

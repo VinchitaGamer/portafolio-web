@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Panel de Administración</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar común -->
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2><i class="fas fa-crown"></i> Admin Panel</h2>
+                <p>Control Total del Portafolio</p>
+            </div>
+            <div class="admin-nav">
+                <a href="dashboard.html" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="projects.html" class="nav-item" data-section="projects">
+                    <i class="fas fa-project-diagram"></i>
+                    Gestión de Proyectos
+                </a>
+                <a href="messages.html" class="nav-item" data-section="messages">
+                    <i class="fas fa-envelope"></i>
+                    Mensajes
+                    <span class="notification-badge" id="message-count">0</span>
+                </a>
+                <a href="images.html" class="nav-item" data-section="images">
+                    <i class="fas fa-images"></i>
+                    Gestión de Imágenes
+                </a>
+                <a href="content.html" class="nav-item" data-section="content">
+                    <i class="fas fa-edit"></i>
+                    Editor de Contenido
+                </a>
+                <a href="navigation.html" class="nav-item" data-section="navigation">
+                    <i class="fas fa-bars"></i>
+                    Navegación
+                </a>
+                <a href="preview.html" class="nav-item" data-section="preview">
+                    <i class="fas fa-eye"></i>
+                    Vista Previa
+                </a>
+                <a href="settings.html" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    Configuración
+                </a>
+                <a href="backup.html" class="nav-item" data-section="backup">
+                    <i class="fas fa-database"></i>
+                    Respaldo
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header común -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1 class="admin-title">Dashboard Principal</h1>
+                    <p class="admin-subtitle">Resumen general del portafolio</p>
+                </div>
+                <div class="admin-user">
+                    <div class="user-info">
+                        <p class="user-name" id="user-name">Cargando...</p>
+                        <p class="user-role" id="user-role">Administrador</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline" onclick="admin.togglePreview()">
+                            <i class="fas fa-eye"></i>
+                            Vista Previa
+                        </button>
+                        <button class="btn btn-outline" onclick="admin.saveAll()">
+                            <i class="fas fa-save"></i>
+                            Guardar Todo
+                        </button>
+                        <button class="logout-btn" onclick="auth.logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="admin-section active">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3 class="card-title">Proyectos</h3>
+                        <div class="card-value" id="projects-count">6</div>
+                        <p class="card-description">Proyectos en el portafolio</p>
+                        <button class="card-action" onclick="window.location.href='projects.html'">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h3 class="card-title">Imágenes</h3>
+                        <div class="card-value" id="images-count">36</div>
+                        <p class="card-description">Capturas de pantalla</p>
+                        <button class="card-action" onclick="window.location.href='images.html'">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="card-title">Mensajes</h3>
+                        <div class="card-value" id="messages-count">0</div>
+                        <p class="card-description">Mensajes recibidos</p>
+                        <button class="card-action" onclick="window.location.href='messages.html'">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="card-title">Visitas</h3>
+                        <div class="card-value" id="visits-count">1,234</div>
+                        <p class="card-description">Visitas al portafolio</p>
+                        <button class="card-action" onclick="window.location.href='preview.html'">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-widgets">
+                    <div class="widget">
+                        <h3>Actividad Reciente</h3>
+                        <div class="activity-list" id="recent-activity">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Nuevo proyecto agregado</p>
+                                    <span>Hace 2 horas</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Imagen actualizada</p>
+                                    <span>Hace 4 horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <h3>Estadísticas Rápidas</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Proyectos Activos</span>
+                                <span class="stat-value">6</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Imágenes Totales</span>
+                                <span class="stat-value">36</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Mensajes No Leídos</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Última Actualización</span>
+                                <span class="stat-value">Hoy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

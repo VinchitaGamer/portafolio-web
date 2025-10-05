@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Proyectos - Panel de Administración</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar común -->
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2><i class="fas fa-crown"></i> Admin Panel</h2>
+                <p>Control Total del Portafolio</p>
+            </div>
+            <div class="admin-nav">
+                <a href="dashboard.html" class="nav-item" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="projects.html" class="nav-item active" data-section="projects">
+                    <i class="fas fa-project-diagram"></i>
+                    Gestión de Proyectos
+                </a>
+                <a href="messages.html" class="nav-item" data-section="messages">
+                    <i class="fas fa-envelope"></i>
+                    Mensajes
+                    <span class="notification-badge" id="message-count">0</span>
+                </a>
+                <a href="images.html" class="nav-item" data-section="images">
+                    <i class="fas fa-images"></i>
+                    Gestión de Imágenes
+                </a>
+                <a href="content.html" class="nav-item" data-section="content">
+                    <i class="fas fa-edit"></i>
+                    Editor de Contenido
+                </a>
+                <a href="navigation.html" class="nav-item" data-section="navigation">
+                    <i class="fas fa-bars"></i>
+                    Navegación
+                </a>
+                <a href="preview.html" class="nav-item" data-section="preview">
+                    <i class="fas fa-eye"></i>
+                    Vista Previa
+                </a>
+                <a href="settings.html" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    Configuración
+                </a>
+                <a href="backup.html" class="nav-item" data-section="backup">
+                    <i class="fas fa-database"></i>
+                    Respaldo
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header común -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1 class="admin-title">Gestión de Proyectos</h1>
+                    <p class="admin-subtitle">Administra todos los proyectos de tu portafolio</p>
+                </div>
+                <div class="admin-user">
+                    <div class="user-info">
+                        <p class="user-name" id="user-name">Cargando...</p>
+                        <p class="user-role" id="user-role">Administrador</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline" onclick="admin.togglePreview()">
+                            <i class="fas fa-eye"></i>
+                            Vista Previa
+                        </button>
+                        <button class="btn btn-outline" onclick="admin.saveAll()">
+                            <i class="fas fa-save"></i>
+                            Guardar Todo
+                        </button>
+                        <button class="logout-btn" onclick="auth.logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Projects Section -->
+            <section id="projects-section" class="admin-section active">
+                <div class="section-header">
+                    <h2>Gestión Completa de Proyectos</h2>
+                    <p>Administra todos los proyectos de tu portafolio con vista previa en tiempo real</p>
+                </div>
+
+                <div class="projects-container">
+                    <div class="projects-sidebar">
+                        <div class="projects-list">
+                            <h3>Proyectos</h3>
+                            <div class="project-item active" data-project="ecommerce">
+                                <div class="project-preview">
+                                    <img src="../img/projects/ecommerce/hero-thumb.jpg" alt="E-Commerce">
+                                </div>
+                                <div class="project-info">
+                                    <h4>Plataforma E-Commerce</h4>
+                                    <p>React, Node.js, MongoDB</p>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="btn-icon" onclick="admin.editProject('ecommerce')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon" onclick="admin.deleteProject('ecommerce')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary add-project-btn" onclick="admin.showAddProjectModal()">
+                                <i class="fas fa-plus"></i>
+                                Agregar Proyecto
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="project-editor">
+                        <div class="editor-tabs">
+                            <button class="editor-tab active" data-tab="general">General</button>
+                            <button class="editor-tab" data-tab="images">Imágenes</button>
+                            <button class="editor-tab" data-tab="content">Contenido</button>
+                            <button class="editor-tab" data-tab="preview">Vista Previa</button>
+                        </div>
+
+                        <div class="editor-content">
+                            <div id="general-tab" class="tab-content active">
+                                <form id="project-form">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="project-title">Título del Proyecto</label>
+                                            <input type="text" id="project-title" value="Plataforma E-Commerce">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="project-category">Categoría</label>
+                                            <select id="project-category">
+                                                <option value="web">Desarrollo Web</option>
+                                                <option value="mobile">Aplicaciones Móviles</option>
+                                                <option value="desktop">Aplicaciones Desktop</option>
+                                                <option value="ai">Inteligencia Artificial</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="project-subtitle">Subtítulo</label>
+                                        <input type="text" id="project-subtitle" value="Solución completa de comercio electrónico moderna y escalable">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="project-description">Descripción</label>
+                                        <textarea id="project-description" rows="4">Desarrollé una plataforma de comercio electrónico completa y moderna que permite a los usuarios comprar y vender productos de manera segura y eficiente.</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="project-tech">Tecnologías (separadas por comas)</label>
+                                        <input type="text" id="project-tech" value="React, Node.js, MongoDB, Express, Stripe">
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="images-tab" class="tab-content">
+                                <div class="images-manager">
+                                    <div class="image-upload-area">
+                                        <div class="upload-zone" id="project-image-upload">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <p>Arrastra imágenes aquí o haz clic para seleccionar</p>
+                                            <input type="file" id="project-file-input" multiple accept="image/*" style="display: none;">
+                                        </div>
+                                        <div class="url-input-section">
+                                            <button class="btn btn-outline" onclick="admin.showUrlInputModal()">
+                                                <i class="fas fa-link"></i>
+                                                Agregar URL de Imagen
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="images-grid" id="project-images-grid">
+                                        <div class="image-item">
+                                            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Hero+Image" alt="Hero">
+                                            <div class="image-overlay">
+                                                <button class="btn-icon" onclick="admin.editImage('hero')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn-icon" onclick="admin.deleteImage('hero')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                            <div class="image-label">Hero</div>
+                                        </div>
+                                        <div class="image-item">
+                                            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Catalog" alt="Catalog">
+                                            <div class="image-overlay">
+                                                <button class="btn-icon" onclick="admin.editImage('catalog')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn-icon" onclick="admin.deleteImage('catalog')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                            <div class="image-label">Catálogo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="content-tab" class="tab-content">
+                                <div class="content-editor">
+                                    <div class="editor-section">
+                                        <h3>Características Principales</h3>
+                                        <div class="feature-list" id="features-list">
+                                            <div class="feature-item">
+                                                <input type="text" value="Catálogo de productos con filtros avanzados">
+                                                <button class="btn-icon" onclick="admin.removeFeature(this)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                            <div class="feature-item">
+                                                <input type="text" value="Sistema de carrito de compras persistente">
+                                                <button class="btn-icon" onclick="admin.removeFeature(this)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline" onclick="admin.addFeature()">
+                                            <i class="fas fa-plus"></i>
+                                            Agregar Característica
+                                        </button>
+                                    </div>
+
+                                    <div class="editor-section">
+                                        <h3>Desafíos Técnicos</h3>
+                                        <textarea id="challenges" rows="3">Uno de los mayores desafíos fue implementar un sistema de pagos seguro y confiable.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="preview-tab" class="tab-content">
+                                <div class="preview-container">
+                                    <div class="preview-header">
+                                        <h3>Vista Previa del Proyecto</h3>
+                                        <div class="preview-controls">
+                                            <button class="btn btn-outline" onclick="admin.refreshProjectPreview()">
+                                                <i class="fas fa-sync"></i>
+                                                Actualizar
+                                            </button>
+                                            <button class="btn btn-primary" onclick="admin.openPreviewInNewTab()">
+                                                <i class="fas fa-external-link-alt"></i>
+                                                Abrir Proyecto
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="preview-frame">
+                                        <iframe id="project-preview-frame" src="../proyecto-ecommerce.html" width="100%" height="600"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

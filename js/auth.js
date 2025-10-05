@@ -143,11 +143,12 @@ class AuthSystem {
 
     checkAuthStatus() {
         // Si estamos en una página protegida y no hay usuario, redirigir al login
-        const protectedPages = ['admin.html', 'dashboard.html'];
+        const protectedPages = ['admin.html', 'dashboard.html', 'projects.html', 'messages.html', 'images.html', 'content.html', 'navigation.html', 'preview.html', 'settings.html', 'backup.html'];
         const currentPage = window.location.pathname.split('/').pop();
-        
+        const loginPath = this.getLoginPath();
+
         if (protectedPages.includes(currentPage) && !this.isLoggedIn) {
-            window.location.href = 'login.html';
+            window.location.href = loginPath;
         }
 
         // Si estamos en login y ya hay usuario, redirigir al dashboard
@@ -158,7 +159,7 @@ class AuthSystem {
 
     redirectToDashboard() {
         if (this.userRole === 'admin') {
-            window.location.href = 'admin.html';
+            window.location.href = 'admin/dashboard.html';
         } else {
             window.location.href = 'dashboard.html';
         }
@@ -204,7 +205,7 @@ class AuthSystem {
 
     requireAuth() {
         if (!this.isLoggedIn) {
-            window.location.href = 'login.html';
+            window.location.href = this.getLoginPath();
             return false;
         }
         return true;
@@ -212,10 +213,17 @@ class AuthSystem {
 
     requireAdmin() {
         if (!this.isLoggedIn || !this.isAdmin()) {
-            window.location.href = 'login.html';
+            window.location.href = this.getLoginPath();
             return false;
         }
         return true;
+    }
+
+    getLoginPath() {
+        // Si estamos dentro de /admin/, regresar a ../login.html
+        const parts = window.location.pathname.split('/');
+        const isInAdmin = parts.includes('admin');
+        return isInAdmin ? '../login.html' : 'login.html';
     }
 }
 

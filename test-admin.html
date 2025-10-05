@@ -1,0 +1,85 @@
+// Script de prueba para verificar funcionamiento del panel administrativo
+// Ejecuta este código en la consola del navegador cuando estés en la página del panel administrativo
+
+console.log('🔧 Iniciando pruebas del panel administrativo...');
+
+// Test 1: Verificar que el objeto admin existe
+if (typeof window.admin !== 'undefined') {
+    console.log('✅ Objeto admin encontrado');
+
+    // Test 2: Verificar métodos básicos
+    const requiredMethods = ['switchSection', 'loadDashboard', 'showNotification', 'saveAll'];
+    let methodsOk = true;
+
+    requiredMethods.forEach(method => {
+        if (typeof window.admin[method] === 'function') {
+            console.log(`✅ Método ${method} disponible`);
+        } else {
+            console.log(`❌ Método ${method} no encontrado`);
+            methodsOk = false;
+        }
+    });
+
+    if (methodsOk) {
+        console.log('✅ Todos los métodos básicos están disponibles');
+    }
+
+    // Test 3: Verificar autenticación
+    if (auth && auth.getCurrentUser()) {
+        console.log('✅ Usuario autenticado:', auth.getCurrentUser().name);
+    } else {
+        console.log('❌ No hay usuario autenticado');
+    }
+
+    // Test 4: Verificar datos del proyecto
+    if (window.admin.projects && Object.keys(window.admin.projects).length > 0) {
+        console.log('✅ Proyectos cargados:', Object.keys(window.admin.projects).length);
+    } else {
+        console.log('❌ No hay proyectos cargados');
+    }
+
+    // Test 5: Probar navegación
+    console.log('🔄 Probando navegación...');
+    try {
+        window.admin.switchSection('dashboard');
+        console.log('✅ Navegación al dashboard funciona');
+
+        setTimeout(() => {
+            window.admin.switchSection('projects');
+            console.log('✅ Navegación a proyectos funciona');
+        }, 1000);
+
+    } catch (error) {
+        console.log('❌ Error en navegación:', error.message);
+    }
+
+    // Test 6: Probar notificaciones
+    console.log('🔄 Probando notificaciones...');
+    try {
+        window.admin.showNotification('Prueba de notificación', 'success');
+        console.log('✅ Sistema de notificaciones funciona');
+    } catch (error) {
+        console.log('❌ Error en notificaciones:', error.message);
+    }
+
+} else {
+    console.log('❌ Objeto admin no encontrado. Revisa que el archivo admin.js esté cargado correctamente.');
+}
+
+// Test 7: Verificar elementos del DOM
+const requiredElements = [
+    '.admin-sidebar',
+    '.admin-main',
+    '#dashboard-section',
+    '.nav-item'
+];
+
+requiredElements.forEach(selector => {
+    if (document.querySelector(selector)) {
+        console.log(`✅ Elemento ${selector} encontrado en el DOM`);
+    } else {
+        console.log(`❌ Elemento ${selector} no encontrado en el DOM`);
+    }
+});
+
+console.log('🔧 Pruebas completadas. Revisa la consola para ver los resultados.');

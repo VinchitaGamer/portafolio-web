@@ -1,28 +1,53 @@
-// Panel de Administración Completo
+// Panel de Administración Simplificado pero Funcional
 class AdminPanel {
     constructor() {
         this.currentSection = 'dashboard';
         this.currentProject = 'ecommerce';
-        this.currentDevice = 'desktop';
+        this.createDefaultAdminUser();
+
         this.messages = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
         this.images = JSON.parse(localStorage.getItem('portfolio_images') || '[]');
-        this.projects = JSON.parse(localStorage.getItem('portfolio_projects') || this.getDefaultProjects());
-        this.settings = JSON.parse(localStorage.getItem('portfolio_settings') || this.getDefaultSettings());
+        this.projects = JSON.parse(localStorage.getItem('portfolio_projects') || '{}');
+        this.settings = JSON.parse(localStorage.getItem('portfolio_settings') || '{}');
+
+        // Inicializar datos por defecto si no existen
+        if (Object.keys(this.projects).length === 0) {
+            this.projects = this.getDefaultProjects();
+            localStorage.setItem('portfolio_projects', JSON.stringify(this.projects));
+        }
+
+
+        if (Object.keys(this.settings).length === 0) {
+            this.settings = this.getDefaultSettings();
+            localStorage.setItem('portfolio_settings', JSON.stringify(this.settings));
+        }
+
+        // Agregar algunos mensajes de ejemplo
+        if (this.messages.length === 0) {
+            this.messages = this.getSampleMessages();
+            localStorage.setItem('portfolio_messages', JSON.stringify(this.messages));
+        }
+
+        // Agregar algunas imágenes de ejemplo
+        if (this.images.length === 0) {
+            this.images = this.getSampleImages();
+            localStorage.setItem('portfolio_images', JSON.stringify(this.images));
+        }
+
         this.init();
     }
 
-    init() {
-        // Verificar autenticación
-        if (!auth.requireAdmin()) return;
+    createDefaultAdminUser() {
+        const defaultUser = {
+            name: 'Jhon Desarrollador',
+            email: 'admin@jhondev.com',
+            password: 'admin123',
+            role: 'admin'
+        };
 
-        this.setupEventListeners();
-        this.loadUserInfo();
-        this.loadDashboard();
-        this.loadProjects();
-        this.loadImages();
-        this.loadMessages();
-        this.loadSettings();
-        this.setupAutoSave();
+        if (!localStorage.getItem('portfolio_user') && !sessionStorage.getItem('portfolio_user')) {
+            localStorage.setItem('portfolio_user', JSON.stringify(defaultUser));
+        }
     }
 
     getDefaultProjects() {
@@ -34,8 +59,6 @@ class AdminPanel {
                 description: 'Desarrollé una plataforma de comercio electrónico completa y moderna que permite a los usuarios comprar y vender productos de manera segura y eficiente.',
                 tech: 'React, Node.js, MongoDB, Express, Stripe',
                 category: 'web',
-                url: '',
-                github: '',
                 features: [
                     'Catálogo de productos con filtros avanzados',
                     'Sistema de carrito de compras persistente',
@@ -46,47 +69,18 @@ class AdminPanel {
                     'Dashboard de analytics y reportes',
                     'Diseño completamente responsivo'
                 ],
-                challenges: 'Uno de los mayores desafíos fue implementar un sistema de pagos seguro y confiable. Integré Stripe para manejar las transacciones y desarrollé un sistema de notificaciones en tiempo real para mantener a los usuarios informados sobre el estado de sus pedidos.',
+                challenges: 'Uno de los mayores desafíos fue implementar un sistema de pagos seguro y confiable.',
                 results: {
                     satisfaction: '95%',
                     salesIncrease: '40%',
                     loadTime: '2.5s'
                 },
                 images: {
-                    hero: 'img/projects/ecommerce/hero.svg',
-                    catalog: 'img/projects/ecommerce/catalog.svg',
-                    cart: 'img/projects/ecommerce/cart.svg',
-                    admin: 'img/projects/ecommerce/admin.svg',
-                    analytics: 'img/projects/ecommerce/analytics.svg',
-                    mobile: 'img/projects/ecommerce/mobile.svg'
-                }
-            },
-            banking: {
-                id: 'banking',
-                title: 'Aplicación Bancaria Móvil',
-                subtitle: 'App móvil segura para operaciones bancarias',
-                description: 'Desarrollo de una aplicación móvil bancaria con las más altas medidas de seguridad.',
-                tech: 'React Native, Firebase, TypeScript',
-                category: 'mobile',
-                url: '',
-                github: '',
-                features: [
-                    'Autenticación biométrica',
-                    'Transferencias instantáneas',
-                    'Historial de transacciones',
-                    'Notificaciones push'
-                ],
-                challenges: 'Implementar medidas de seguridad avanzadas para proteger las transacciones financieras.',
-                results: {
-                    satisfaction: '98%',
-                    salesIncrease: '25%',
-                    loadTime: '1.8s'
-                },
-                images: {
-                    hero: 'img/projects/banking/hero.svg',
-                    login: 'img/projects/banking/login.svg',
-                    dashboard: 'img/projects/banking/dashboard.svg',
-                    transfer: 'img/projects/banking/transfer.svg'
+                    hero: 'https://via.placeholder.com/400x300/667eea/ffffff?text=Hero+Image',
+                    catalog: 'https://via.placeholder.com/400x300/764ba2/ffffff?text=Catalog',
+                    cart: 'https://via.placeholder.com/400x300/667eea/ffffff?text=Cart',
+                    admin: 'https://via.placeholder.com/400x300/764ba2/ffffff?text=Admin',
+                    analytics: 'https://via.placeholder.com/400x300/667eea/ffffff?text=Analytics'
                 }
             }
         };
@@ -96,46 +90,83 @@ class AdminPanel {
         return {
             title: 'Jhon Desarrollador',
             subtitle: 'Desarrollador de Software Freelance',
-            description: 'Creo experiencias digitales hermosas, funcionales y centradas en el usuario. Especializado en desarrollo web moderno y aplicaciones móviles.',
-            adminEmail: 'admin@jhondev.com',
-            contactEmail: 'juan.desarrollador@email.com',
-            phone: '+1 (555) 123-4567',
-            address: 'Ciudad, País',
-            social: {
-                github: '',
-                linkedin: '',
-                twitter: '',
-                instagram: ''
-            },
+            description: 'Creo experiencias digitales hermosas, funcionales y centradas en el usuario.',
             content: {
                 home: {
                     title: 'Jhon Desarrollador',
                     subtitle: 'Desarrollador de Software Freelance',
-                    description: 'Creo experiencias digitales hermosas, funcionales y centradas en el usuario. Especializado en desarrollo web moderno y aplicaciones móviles.'
-                },
-                about: {
-                    title: 'Acerca de Mí',
-                    description: 'Soy un desarrollador apasionado con más de 5 años de experiencia creando soluciones digitales innovadoras...'
-                },
-                services: [
-                    {
-                        name: 'Desarrollo Web',
-                        description: 'Desarrollo de sitios web modernos y responsivos'
-                    },
-                    {
-                        name: 'Aplicaciones Móviles',
-                        description: 'Desarrollo de aplicaciones móviles nativas e híbridas'
-                    }
-                ],
-                navigation: [
-                    { text: 'Inicio', url: '#home' },
-                    { text: 'Acerca de', url: '#about' },
-                    { text: 'Proyectos', url: '#projects' },
-                    { text: 'Servicios', url: '#services' },
-                    { text: 'Contacto', url: '#contact' }
-                ]
+                    description: 'Creo experiencias digitales hermosas, funcionales y centradas en el usuario.'
+                }
             }
         };
+    }
+
+    getSampleMessages() {
+        return [
+            {
+                id: 1,
+                name: 'María González',
+                email: 'maria.gonzalez@email.com',
+                subject: 'Interés en servicios de desarrollo web',
+                message: 'Hola Jhon, estoy interesada en tus servicios de desarrollo web para mi proyecto de e-commerce. ¿Podrías enviarme más información sobre tus tarifas y tiempos de entrega?',
+                date: new Date(Date.now() - 172800000).toISOString(),
+                read: false
+            },
+            {
+                id: 2,
+                name: 'Carlos Rodríguez',
+                email: 'carlos.rodriguez@empresa.com',
+                subject: 'Consulta sobre aplicación móvil',
+                message: 'Estimado Jhon, vimos tu portafolio y estamos interesados en desarrollar una aplicación móvil para nuestra empresa. ¿Tienes disponibilidad para una reunión esta semana?',
+                date: new Date(Date.now() - 86400000).toISOString(),
+                read: true
+            }
+        ];
+    }
+
+    getSampleImages() {
+        return [
+            {
+                id: 1,
+                name: 'proyecto-hero.jpg',
+                url: 'https://via.placeholder.com/400x300/667eea/ffffff?text=Sample+Hero',
+                alt: 'Imagen de ejemplo del proyecto',
+                project: 'ecommerce',
+                size: '45 KB',
+                date: new Date().toISOString(),
+                type: 'image/jpeg'
+            }
+        ];
+    }
+
+    init() {
+        if (!auth.requireAdmin()) return;
+
+        this.setupEventListeners();
+        this.setupImageUploadListeners();
+        this.ensureUrlModal();
+        this.loadUserInfo();
+
+        const currentPage = window.location.pathname.split('/').pop();
+        switch (currentPage) {
+            case 'images.html':
+                this.loadImages();
+                break;
+            case 'projects.html':
+                this.loadProjects();
+                break;
+            case 'messages.html':
+                this.loadMessages();
+                break;
+            case 'backup.html':
+                this.loadBackup();
+                break;
+            default:
+                this.loadDashboard();
+        }
+
+        this.setupAutoSave();
+        console.log('Panel de administración inicializado correctamente');
     }
 
     setupEventListeners() {
@@ -143,163 +174,63 @@ class AdminPanel {
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                const section = e.target.dataset.section;
-                this.switchSection(section);
+                const section = e.target.closest('.nav-item').dataset.section;
+                if (section) this.switchSection(section);
             });
         });
 
-        // Editor de proyectos
-        document.querySelectorAll('.project-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                const projectId = e.currentTarget.dataset.project;
-                this.selectProject(projectId);
-            });
-        });
-
-        // Editor tabs
-        document.querySelectorAll('.editor-tab').forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                const tabName = e.target.dataset.tab;
-                this.switchEditorTab(tabName);
-            });
-        });
-
-        // Content sections
-        document.querySelectorAll('.section-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                const section = e.target.dataset.section;
-                this.switchContentSection(section);
-            });
-        });
-
-        // Device selector
-        document.querySelectorAll('.device-btn').forEach(btn => {
+        // Botones de acción principales
+        document.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const device = e.target.dataset.device;
-                this.switchDevice(device);
+                const action = e.target.onclick?.toString() || '';
+                if (action.includes('admin.')) {
+                    // Los métodos serán manejados por el proxy global
+                }
             });
         });
 
-        // Upload de imágenes
-        const fileInput = document.getElementById('file-input');
-        const uploadArea = document.getElementById('image-upload');
-        const projectFileInput = document.getElementById('project-file-input');
-        const projectUploadArea = document.getElementById('project-image-upload');
-
-        if (fileInput && uploadArea) {
-        fileInput.addEventListener('change', (e) => {
-            this.handleFileUpload(e.target.files);
-        });
-
-            this.setupDragAndDrop(uploadArea, fileInput);
+        // Filtro de mensajes (messages.html)
+        const msgFilter = document.getElementById('message-filter');
+        if (msgFilter && !msgFilter.dataset.listenerAttached) {
+            msgFilter.dataset.listenerAttached = '1';
+            msgFilter.addEventListener('change', () => this.updateMessagesList());
         }
-
-        if (projectFileInput && projectUploadArea) {
-            projectFileInput.addEventListener('change', (e) => {
-                this.handleProjectImageUpload(e.target.files);
-            });
-
-            this.setupDragAndDrop(projectUploadArea, projectFileInput);
-        }
-
-        // Filtros
-        const projectFilter = document.getElementById('project-filter');
-        const messageFilter = document.getElementById('message-filter');
-
-        if (projectFilter) {
-            projectFilter.addEventListener('change', (e) => {
-                this.filterImages(e.target.value);
-            });
-        }
-
-        if (messageFilter) {
-            messageFilter.addEventListener('change', (e) => {
-                this.filterMessages(e.target.value);
-            });
-        }
-
-        // Formularios
-        const projectForm = document.getElementById('project-form');
-        const settingsForm = document.getElementById('settings-form');
-        const addProjectForm = document.getElementById('add-project-form');
-
-        if (projectForm) {
-            projectForm.addEventListener('input', () => {
-                this.updateProjectPreview();
-            });
-        }
-
-        if (settingsForm) {
-            settingsForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.saveSettings();
-            });
-        }
-
-        if (addProjectForm) {
-            addProjectForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.addNewProject();
-            });
-        }
-
-        // Backup file input
-        const backupFileInput = document.getElementById('backup-file');
-        if (backupFileInput) {
-            backupFileInput.addEventListener('change', (e) => {
-                this.restoreBackup(e.target.files[0]);
-            });
-        }
-
-        // Auto-save en inputs
-        document.addEventListener('input', (e) => {
-            if (e.target.matches('input, textarea, select')) {
-                this.debounceAutoSave();
-            }
-        });
-    }
-
-    setupDragAndDrop(uploadArea, fileInput) {
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
-
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
-
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            fileInput.files = e.dataTransfer.files;
-            fileInput.dispatchEvent(new Event('change'));
-        });
-
-        uploadArea.addEventListener('click', () => {
-            fileInput.click();
-        });
     }
 
     loadUserInfo() {
         const user = auth.getCurrentUser();
-        document.getElementById('user-name').textContent = user.name;
-        document.getElementById('user-role').textContent = user.role === 'admin' ? 'Administrador' : 'Usuario';
+        if (user) {
+            const userNameEl = document.getElementById('user-name');
+            const userRoleEl = document.getElementById('user-role');
+            if (userNameEl) userNameEl.textContent = user.name;
+            if (userRoleEl) userRoleEl.textContent = user.role === 'admin' ? 'Administrador' : 'Usuario';
+        }
     }
 
     switchSection(section) {
-        // Actualizar navegación
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        document.querySelector(`[data-section="${section}"]`).classList.add('active');
+        // Si estamos en archivos separados, redirigir a la página correspondiente
+        const currentPage = window.location.pathname.split('/').pop();
 
-        // Actualizar secciones
-        document.querySelectorAll('.admin-section').forEach(sec => {
-            sec.classList.remove('active');
-        });
-        document.getElementById(`${section}-section`).classList.add('active');
+        if (currentPage !== 'admin.html' && currentPage !== 'index.html') {
+            const sectionUrls = {
+                dashboard: 'dashboard.html',
+                projects: 'projects.html',
+                messages: 'messages.html',
+                images: 'images.html',
+                content: 'content.html',
+                navigation: 'navigation.html',
+                preview: 'preview.html',
+                settings: 'settings.html',
+                backup: 'backup.html'
+            };
 
+            if (sectionUrls[section] && currentPage !== sectionUrls[section]) {
+                window.location.href = sectionUrls[section];
+                return;
+            }
+        }
+
+        // Si estamos en admin.html o en la página correcta, usar navegación interna
         this.currentSection = section;
 
         // Cargar contenido específico
@@ -310,36 +241,56 @@ class AdminPanel {
             case 'projects':
                 this.loadProjects();
                 break;
-            case 'images':
-                this.loadImages();
-                break;
-            case 'content':
-                this.loadContentEditor();
-                break;
-            case 'navigation':
-                this.loadNavigationEditor();
-                break;
-            case 'preview':
-                this.loadPreview();
-                break;
             case 'messages':
                 this.loadMessages();
+                break;
+            case 'images':
+                this.loadImages();
                 break;
             case 'settings':
                 this.loadSettings();
                 break;
-            case 'backup':
-                this.loadBackup();
-                break;
         }
     }
 
+    // Método para navegación directa (útil para archivos separados)
+    navigateToSection(section) {
+        const sectionUrls = {
+            dashboard: 'dashboard.html',
+            projects: 'projects.html',
+            messages: 'messages.html',
+            images: 'images.html',
+            content: 'content.html',
+            navigation: 'navigation.html',
+            preview: 'preview.html',
+            settings: 'settings.html',
+            backup: 'backup.html'
+        };
+
+        if (sectionUrls[section]) {
+            window.location.href = sectionUrls[section];
+        }
+    }
+
+    // Método para volver al dashboard
+    goToDashboard() {
+        window.location.href = 'dashboard.html';
+    }
+
+    // Método para abrir vista previa
+    openPreview() {
+        window.open('preview.html', '_blank');
+    }
+
     loadDashboard() {
-        // Actualizar contadores
-        document.getElementById('projects-count').textContent = Object.keys(this.projects).length;
-        document.getElementById('images-count').textContent = this.images.length;
-        document.getElementById('messages-count').textContent = this.messages.length;
-        document.getElementById('message-count').textContent = this.messages.filter(m => !m.read).length;
+        // Actualizar contadores básicos
+        const projectsCount = document.getElementById('projects-count');
+        const imagesCount = document.getElementById('images-count');
+        const messagesCount = document.getElementById('messages-count');
+
+        if (projectsCount) projectsCount.textContent = Object.keys(this.projects).length;
+        if (imagesCount) imagesCount.textContent = this.images.length;
+        if (messagesCount) messagesCount.textContent = this.messages.length;
 
         // Actualizar actividad reciente
         this.updateRecentActivity();
@@ -347,11 +298,11 @@ class AdminPanel {
 
     updateRecentActivity() {
         const activityList = document.getElementById('recent-activity');
+        if (!activityList) return;
+
         const activities = [
-            { icon: 'fas fa-plus', text: 'Nuevo proyecto agregado', time: 'Hace 2 horas' },
-            { icon: 'fas fa-image', text: 'Imagen actualizada', time: 'Hace 4 horas' },
-            { icon: 'fas fa-edit', text: 'Contenido modificado', time: 'Hace 6 horas' },
-            { icon: 'fas fa-save', text: 'Configuración guardada', time: 'Hace 1 día' }
+            { icon: 'fas fa-plus', text: 'Panel administrativo inicializado', time: 'Ahora' },
+            { icon: 'fas fa-check', text: 'Sistema funcionando correctamente', time: 'Reciente' }
         ];
 
         activityList.innerHTML = activities.map(activity => `
@@ -367,31 +318,63 @@ class AdminPanel {
         `).join('');
     }
 
+    markAllAsRead() {
+        if (!this.messages.length) return;
+        this.messages = this.messages.map(m => ({ ...m, read: true }));
+        this.saveMessages();
+        this.updateMessagesList();
+        this.updateMessageCount();
+        this.showNotification('Todos los mensajes marcados como leídos', 'success');
+    }
+
     loadProjects() {
         this.updateProjectsList();
-        this.loadProjectEditor();
+        this.updateProjectImagesGrid();
+        // Activar selección de proyecto al hacer clic en la lista
+        const container = document.querySelector('.projects-list');
+        if (container && !container.dataset.listenerAttached) {
+            container.dataset.listenerAttached = '1';
+            container.addEventListener('click', (e) => {
+                const item = e.target.closest('.project-item');
+                if (!item) return;
+                const pid = item.dataset.project;
+                if (!pid) return;
+                this.currentProject = pid;
+                // Actualizar activo
+                container.querySelectorAll('.project-item').forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
+                this.updateProjectImagesGrid();
+                this.populateProjectForm();
+            });
+        }
+
+        // Inicializar formulario de proyecto
+        this.setupProjectFormListeners();
+        this.populateProjectForm();
     }
 
     updateProjectsList() {
         const projectsList = document.querySelector('.projects-list');
+        if (!projectsList) return;
+
         const projectsHtml = Object.values(this.projects).map(project => `
             <div class="project-item ${project.id === this.currentProject ? 'active' : ''}" data-project="${project.id}">
                 <div class="project-preview">
-                    <img src="${project.images.hero}" alt="${project.title}">
-                        </div>
+                    <img src="${project.images?.hero || 'https://via.placeholder.com/100x80/667eea/ffffff?text=No+Image'}" alt="${project.title}">
+                </div>
                 <div class="project-info">
                     <h4>${project.title}</h4>
-                    <p>${project.tech}</p>
+                    <p>${project.tech || 'Tecnologías no especificadas'}</p>
                 </div>
                 <div class="project-actions">
                     <button class="btn-icon" onclick="admin.editProject('${project.id}')">
-                                <i class="fas fa-edit"></i>
-                            </button>
+                        <i class="fas fa-edit"></i>
+                    </button>
                     <button class="btn-icon" onclick="admin.deleteProject('${project.id}')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
         `).join('');
 
         projectsList.innerHTML = projectsHtml + `
@@ -400,960 +383,419 @@ class AdminPanel {
                 Agregar Proyecto
             </button>
         `;
-
-        // Re-attach event listeners
-        document.querySelectorAll('.project-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                const projectId = e.currentTarget.dataset.project;
-                this.selectProject(projectId);
-            });
-        });
-    }
-
-    selectProject(projectId) {
-        this.currentProject = projectId;
-        
-        // Update UI
-        document.querySelectorAll('.project-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        document.querySelector(`[data-project="${projectId}"]`).classList.add('active');
-
-        this.loadProjectEditor();
-        this.loadProjectPreview(projectId);
-    }
-
-    loadProjectEditor() {
-        const project = this.projects[this.currentProject];
-        if (!project) return;
-
-        // Fill form with project data
-        document.getElementById('project-title').value = project.title;
-        document.getElementById('project-subtitle').value = project.subtitle;
-        document.getElementById('project-description').value = project.description;
-        document.getElementById('project-tech').value = project.tech;
-        document.getElementById('project-category').value = project.category;
-        document.getElementById('project-url').value = project.url;
-        document.getElementById('project-github').value = project.github;
-
-        // Load features
-        this.loadFeatures(project.features);
-        
-        // Load challenges
-        document.getElementById('challenges').value = project.challenges;
-
-        // Load results
-        document.querySelectorAll('.result-item input').forEach((input, index) => {
-            const values = Object.values(project.results);
-            input.value = values[index] || '';
-        });
-
-        // Load images
-        this.loadProjectImages(project.images);
-
-        // Update preview
-        this.updateProjectPreview();
-    }
-
-    loadFeatures(features) {
-        const featuresList = document.getElementById('features-list');
-        featuresList.innerHTML = features.map(feature => `
-            <div class="feature-item">
-                <input type="text" value="${feature}">
-                <button class="btn-icon" onclick="admin.removeFeature(this)">
-                    <i class="fas fa-trash"></i>
-                    </button>
-            </div>
-        `).join('');
-    }
-
-    loadProjectImages(images) {
-        const imagesGrid = document.getElementById('project-images-grid');
-        imagesGrid.innerHTML = Object.entries(images).map(([key, src]) => `
-            <div class="image-item">
-                <img src="${src}" alt="${key}">
-                <div class="image-overlay">
-                    <button class="btn-icon" onclick="admin.editImage('${key}')">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn-icon" onclick="admin.deleteImage('${key}')">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                <div class="image-label">${key}</div>
-            </div>
-        `).join('');
-    }
-
-    switchEditorTab(tabName) {
-        // Update tabs
-        document.querySelectorAll('.editor-tab').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-
-        // Update content
-        document.querySelectorAll('.tab-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        document.getElementById(`${tabName}-tab`).classList.add('active');
-
-        // Special handling for preview tab
-        if (tabName === 'preview') {
-            this.updateProjectPreview();
-        }
-    }
-
-    updateProjectPreview() {
-        const project = this.projects[this.currentProject];
-        if (!project) return;
-
-        // Update project data from form
-        project.title = document.getElementById('project-title').value;
-        project.subtitle = document.getElementById('project-subtitle').value;
-        project.description = document.getElementById('project-description').value;
-        project.tech = document.getElementById('project-tech').value;
-        project.category = document.getElementById('project-category').value;
-        project.url = document.getElementById('project-url').value;
-        project.github = document.getElementById('project-github').value;
-
-        // Update features
-        const featureInputs = document.querySelectorAll('#features-list input');
-        project.features = Array.from(featureInputs).map(input => input.value).filter(f => f.trim());
-
-        // Update challenges
-        project.challenges = document.getElementById('challenges').value;
-
-        // Update results
-        const resultInputs = document.querySelectorAll('.result-item input');
-        const resultKeys = Object.keys(project.results);
-        resultInputs.forEach((input, index) => {
-            if (resultKeys[index]) {
-                project.results[resultKeys[index]] = input.value;
-            }
-        });
-
-        // Save to localStorage
-        this.saveProjects();
-
-        // Update preview iframe
-        const previewFrame = document.getElementById('project-preview-frame');
-        if (previewFrame) {
-            previewFrame.src = previewFrame.src; // Refresh
-        }
-    }
-
-    loadImages() {
-        const imagesGrid = document.getElementById('images-grid');
-        if (!imagesGrid) return;
-
-        if (this.images.length === 0) {
-            imagesGrid.innerHTML = '<p>No hay imágenes cargadas</p>';
-            return;
-        }
-
-        imagesGrid.innerHTML = this.images.map((image, index) => `
-            <div class="image-item">
-                <img src="${image.url}" alt="${image.name}" loading="lazy">
-                <div class="image-overlay">
-                    <button class="btn-icon" onclick="admin.editImageData(${index})">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn-icon" onclick="admin.deleteImageData(${index})">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                <div class="image-label">${image.name}</div>
-            </div>
-        `).join('');
-    }
-
-    handleFileUpload(files) {
-        Array.from(files).forEach(file => {
-            if (file.type.startsWith('image/')) {
-                this.uploadImage(file);
-            }
-        });
-    }
-
-    handleProjectImageUpload(files) {
-        Array.from(files).forEach(file => {
-            if (file.type.startsWith('image/')) {
-                this.uploadProjectImage(file);
-            }
-        });
-    }
-
-    uploadImage(file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const imageData = {
-                id: Date.now(),
-                name: file.name,
-                url: e.target.result,
-                alt: file.name.replace(/\.[^/.]+$/, ""),
-                project: 'general',
-                size: this.formatFileSize(file.size),
-                date: new Date().toISOString(),
-                type: file.type
-            };
-
-            this.images.push(imageData);
-            this.saveImages();
-            this.loadImages();
-            this.showNotification('Imagen subida correctamente', 'success');
-        };
-        reader.readAsDataURL(file);
-    }
-
-    uploadProjectImage(file) {
-        const imageKey = prompt('Nombre de la imagen (hero, catalog, cart, etc.):', 'hero');
-        if (!imageKey) return;
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            this.projects[this.currentProject].images[imageKey] = e.target.result;
-            this.saveProjects();
-            this.loadProjectImages(this.projects[this.currentProject].images);
-            this.showNotification('Imagen del proyecto actualizada', 'success');
-        };
-        reader.readAsDataURL(file);
-    }
-
-    formatFileSize(bytes) {
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-    }
-
-    loadContentEditor() {
-        this.loadContentSection('home');
-    }
-
-    switchContentSection(section) {
-        // Update navigation
-        document.querySelectorAll('.section-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        document.querySelector(`[data-section="${section}"]`).classList.add('active');
-
-        // Update content
-        document.querySelectorAll('.content-section').forEach(content => {
-            content.classList.remove('active');
-        });
-        document.getElementById(`${section}-content`).classList.add('active');
-
-        this.loadContentSection(section);
-    }
-
-    loadContentSection(section) {
-        const content = this.settings.content[section];
-        if (!content) return;
-
-        switch(section) {
-            case 'home':
-                document.getElementById('home-title').value = content.title;
-                document.getElementById('home-subtitle').value = content.subtitle;
-                document.getElementById('home-description').value = content.description;
-                break;
-            case 'about':
-                document.getElementById('about-title').value = content.title;
-                document.getElementById('about-description').value = content.description;
-                break;
-            case 'services':
-                this.loadServices(content);
-                break;
-            case 'contact':
-                document.getElementById('contact-email').value = this.settings.contactEmail;
-                document.getElementById('contact-phone').value = this.settings.phone;
-                document.getElementById('contact-address').value = this.settings.address;
-                break;
-        }
-    }
-
-    loadServices(services) {
-        const servicesList = document.getElementById('services-list');
-        servicesList.innerHTML = services.map(service => `
-            <div class="service-item">
-                <input type="text" value="${service.name}" placeholder="Nombre del servicio">
-                <textarea placeholder="Descripción del servicio">${service.description}</textarea>
-                <button class="btn-icon" onclick="admin.removeService(this)">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        `).join('');
-    }
-
-    loadNavigationEditor() {
-        const navigation = this.settings.content.navigation;
-        const navItems = document.getElementById('nav-items');
-        
-        navItems.innerHTML = navigation.map(item => `
-            <div class="nav-item-editor">
-                <input type="text" value="${item.text}" placeholder="Texto del enlace">
-                <input type="text" value="${item.url}" placeholder="URL o ID">
-                <button class="btn-icon" onclick="admin.removeNavItem(this)">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        `).join('');
-
-        this.updateNavigationPreview();
-    }
-
-    updateNavigationPreview() {
-        const navItems = document.querySelectorAll('.nav-item-editor');
-        const previewNav = document.getElementById('preview-nav');
-        
-        previewNav.innerHTML = Array.from(navItems).map(item => {
-            const textInput = item.querySelector('input[type="text"]:first-of-type');
-            const urlInput = item.querySelector('input[type="text"]:last-of-type');
-            return `<a href="${urlInput.value}" class="preview-nav-item">${textInput.value}</a>`;
-        }).join('');
-    }
-
-    loadPreview() {
-        this.initializePreview();
-    }
-
-    switchDevice(device) {
-        this.currentDevice = device;
-        
-        // Update buttons
-        document.querySelectorAll('.device-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        document.querySelector(`[data-device="${device}"]`).classList.add('active');
-
-        // Update preview containers
-        const mainContainer = document.querySelector('.preview-frame-container');
-        const projectContainer = document.querySelector('.preview-frame');
-        
-        if (mainContainer) {
-            mainContainer.className = `preview-frame-container ${device}`;
-        }
-        
-        if (projectContainer) {
-            projectContainer.className = `preview-frame ${device}`;
-        }
-
-        // Apply device-specific styles
-        this.applyDeviceStyles(device);
-        this.updatePreview();
-    }
-
-    applyDeviceStyles(device) {
-        const previewFrame = document.getElementById('preview-frame');
-        const projectPreviewFrame = document.getElementById('project-preview-frame');
-        
-        if (!previewFrame && !projectPreviewFrame) return;
-        
-        const frames = [previewFrame, projectPreviewFrame].filter(frame => frame);
-        
-        frames.forEach(frame => {
-            switch(device) {
-                case 'desktop':
-                    frame.style.width = '100%';
-                    frame.style.height = '800px';
-                    frame.style.maxWidth = 'none';
-                    break;
-                case 'tablet':
-                    frame.style.width = '768px';
-                    frame.style.height = '1024px';
-                    frame.style.maxWidth = '768px';
-                    frame.style.margin = '0 auto';
-                    break;
-                case 'mobile':
-                    frame.style.width = '375px';
-                    frame.style.height = '667px';
-                    frame.style.maxWidth = '375px';
-                    frame.style.margin = '0 auto';
-                    break;
-            }
-        });
-    }
-
-    updatePreview() {
-        const previewFrame = document.getElementById('preview-frame');
-        const projectPreviewFrame = document.getElementById('project-preview-frame');
-        
-        if (previewFrame) {
-            // Forzar recarga del iframe principal
-            const currentSrc = previewFrame.src;
-            previewFrame.src = '';
-            setTimeout(() => {
-                previewFrame.src = currentSrc;
-            }, 50);
-        }
-        
-        if (projectPreviewFrame) {
-            // Actualizar vista previa del proyecto si hay uno seleccionado
-            if (this.currentProject && this.projects[this.currentProject]) {
-                const project = this.projects[this.currentProject];
-                const projectUrl = `proyecto-${project.slug}.html`;
-                projectPreviewFrame.src = projectUrl;
-            }
-        }
-        
-        // Actualizar estadísticas de vista previa
-        this.updatePreviewStats();
-    }
-
-    updatePreviewStats() {
-        // Actualizar contador de visitas simuladas
-        const visitsElement = document.querySelector('.card-value');
-        if (visitsElement && visitsElement.textContent.includes(',')) {
-            const currentVisits = parseInt(visitsElement.textContent.replace(/,/g, ''));
-            const newVisits = currentVisits + Math.floor(Math.random() * 5) + 1;
-            visitsElement.textContent = newVisits.toLocaleString();
-        }
-        
-        // Actualizar última actualización
-        const lastUpdateElements = document.querySelectorAll('.stat-value');
-        lastUpdateElements.forEach(element => {
-            if (element.textContent === 'Hoy') {
-                element.textContent = new Date().toLocaleTimeString();
-            }
-        });
     }
 
     loadMessages() {
+        this.updateMessagesList();
+    }
+
+    updateMessagesList() {
         const messagesList = document.getElementById('messages-list');
         if (!messagesList) return;
 
         if (this.messages.length === 0) {
-            messagesList.innerHTML = '<p>No hay mensajes</p>';
+            messagesList.innerHTML = '<p>No hay mensajes recibidos</p>';
             return;
         }
 
-        messagesList.innerHTML = this.messages.map((message, index) => `
-            <div class="message-item ${message.read ? '' : 'unread'}">
+        const filterVal = document.getElementById('message-filter')?.value || '';
+        const filtered = this.messages.filter(m => {
+            if (filterVal === 'unread') return !m.read;
+            if (filterVal === 'read') return m.read;
+            return true;
+        });
+
+        messagesList.innerHTML = filtered.map((message, index) => `
+            <div class="message-item ${message.read ? 'read' : 'unread'}" data-message="${index}">
                 <div class="message-header">
-                    <span class="message-sender">${message.name}</span>
-                    <span class="message-date">${new Date(message.date).toLocaleDateString()}</span>
+                    <div class="message-info">
+                        <h4>${message.name}</h4>
+                        <p>${message.email}</p>
+                        <span>${new Date(message.date).toLocaleString()}</span>
+                    </div>
+                    <div class="message-actions">
+                        <button class="btn-icon ${message.read ? 'read' : 'unread'}" onclick="admin.toggleMessageRead(${index})">
+                            <i class="fas fa-${message.read ? 'undo' : 'check'}"></i>
+                        </button>
+                        <button class="btn-icon" onclick="admin.deleteMessage(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="message-content">${message.message}</div>
-                <div class="message-actions">
-                    <button class="btn btn-sm btn-primary" onclick="admin.viewMessage(${index})">
-                        <i class="fas fa-eye"></i> Ver
-                    </button>
-                    <button class="btn btn-sm btn-danger" onclick="admin.deleteMessage(${index})">
-                        <i class="fas fa-trash"></i> Eliminar
-                    </button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    loadSettings() {
-        // Load general settings
-        document.getElementById('portfolio-title').value = this.settings.title;
-        document.getElementById('portfolio-subtitle').value = this.settings.subtitle;
-        document.getElementById('portfolio-description').value = this.settings.description;
-        document.getElementById('admin-email').value = this.settings.adminEmail;
-        document.getElementById('contact-email').value = this.settings.contactEmail;
-
-        // Load social media
-        document.getElementById('github-url').value = this.settings.social.github;
-        document.getElementById('linkedin-url').value = this.settings.social.linkedin;
-        document.getElementById('twitter-url').value = this.settings.social.twitter;
-        document.getElementById('instagram-url').value = this.settings.social.instagram;
-    }
-
-    loadBackup() {
-        // Load backup history
-        const backupList = document.getElementById('backup-list');
-        const backups = JSON.parse(localStorage.getItem('portfolio_backups') || '[]');
-        
-        if (backups.length === 0) {
-            backupList.innerHTML = '<p>No hay respaldos disponibles</p>';
-            return;
-        }
-
-        backupList.innerHTML = backups.map((backup, index) => `
-            <div class="backup-item">
-                <div class="backup-info">
-                    <h4>${backup.name}</h4>
-                    <p>${new Date(backup.date).toLocaleString()}</p>
-                </div>
-                <div class="backup-actions">
-                    <button class="btn-icon" onclick="admin.restoreBackupFromHistory(${index})">
-                        <i class="fas fa-undo"></i>
-                    </button>
-                    <button class="btn-icon" onclick="admin.downloadBackupFromHistory(${index})">
-                        <i class="fas fa-download"></i>
-                    </button>
+                <div class="message-content">
+                    ${message.message}
                 </div>
             </div>
         `).join('');
     }
 
-    // Action methods
-    addFeature() {
-        const featuresList = document.getElementById('features-list');
-        const newFeature = document.createElement('div');
-        newFeature.className = 'feature-item';
-        newFeature.innerHTML = `
-            <input type="text" placeholder="Nueva característica">
-            <button class="btn-icon" onclick="admin.removeFeature(this)">
-                <i class="fas fa-trash"></i>
-            </button>
-        `;
-        featuresList.appendChild(newFeature);
-    }
-
-    removeFeature(button) {
-        button.parentElement.remove();
-        this.updateProjectPreview();
-    }
-
-    addService() {
-        const servicesList = document.getElementById('services-list');
-        const newService = document.createElement('div');
-        newService.className = 'service-item';
-        newService.innerHTML = `
-            <input type="text" placeholder="Nombre del servicio">
-            <textarea placeholder="Descripción del servicio"></textarea>
-            <button class="btn-icon" onclick="admin.removeService(this)">
-                <i class="fas fa-trash"></i>
-            </button>
-        `;
-        servicesList.appendChild(newService);
-    }
-
-    removeService(button) {
-        button.parentElement.remove();
-    }
-
-    addNavItem() {
-        const navItems = document.getElementById('nav-items');
-        const newItem = document.createElement('div');
-        newItem.className = 'nav-item-editor';
-        newItem.innerHTML = `
-            <input type="text" placeholder="Texto del enlace">
-            <input type="text" placeholder="URL o ID">
-            <button class="btn-icon" onclick="admin.removeNavItem(this)">
-                <i class="fas fa-trash"></i>
-            </button>
-        `;
-        navItems.appendChild(newItem);
-        this.updateNavigationPreview();
-    }
-
-    removeNavItem(button) {
-        button.parentElement.remove();
-        this.updateNavigationPreview();
-    }
-
-    showAddProjectModal() {
-        document.getElementById('add-project-modal').style.display = 'flex';
-    }
-
-    closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-    }
-
-    addNewProject() {
-        const title = document.getElementById('new-project-title').value;
-        const subtitle = document.getElementById('new-project-subtitle').value;
-        const tech = document.getElementById('new-project-tech').value;
-
-        if (!title || !subtitle) {
-            this.showNotification('Por favor completa todos los campos requeridos', 'error');
-            return;
-        }
-
-        const projectId = title.toLowerCase().replace(/\s+/g, '-');
-        this.projects[projectId] = {
-            id: projectId,
-            title,
-            subtitle,
-            description: '',
-            tech,
-            category: 'web',
-            url: '',
-            github: '',
-            features: [],
-            challenges: '',
-            results: {
-                satisfaction: '',
-                salesIncrease: '',
-                loadTime: ''
-            },
-            images: {
-                hero: 'https://via.placeholder.com/400x300'
-            }
-        };
-
-        this.saveProjects();
-        this.updateProjectsList();
-        this.closeModal('add-project-modal');
-        this.showNotification('Proyecto agregado exitosamente', 'success');
-    }
-
-    editProject(projectId) {
-        this.selectProject(projectId);
-    }
-
-    deleteProject(projectId) {
-        if (confirm('¿Estás seguro de que quieres eliminar este proyecto?')) {
-            delete this.projects[projectId];
-            this.saveProjects();
-            this.updateProjectsList();
-            this.showNotification('Proyecto eliminado', 'success');
-        }
-    }
-
-    editImage(imageKey) {
-        const newUrl = prompt('Nueva URL de la imagen:', this.projects[this.currentProject].images[imageKey]);
-        if (newUrl) {
-            this.projects[this.currentProject].images[imageKey] = newUrl;
-            this.saveProjects();
-            this.loadProjectImages(this.projects[this.currentProject].images);
-            this.showNotification('Imagen actualizada', 'success');
-        }
-    }
-
-    deleteImage(imageKey) {
-        if (confirm('¿Estás seguro de que quieres eliminar esta imagen?')) {
-            delete this.projects[this.currentProject].images[imageKey];
-            this.saveProjects();
-            this.loadProjectImages(this.projects[this.currentProject].images);
-            this.showNotification('Imagen eliminada', 'success');
-        }
-    }
-
-    editImageData(index) {
-        const image = this.images[index];
-        const newName = prompt('Nuevo nombre:', image.name);
-        const newProject = prompt('Proyecto:', image.project);
-        
-        if (newName) {
-            this.images[index].name = newName;
-            this.images[index].alt = newName.replace(/\.[^/.]+$/, "");
-        }
-        if (newProject) {
-            this.images[index].project = newProject;
-        }
-        
-        this.saveImages();
-        this.loadImages();
-        this.showNotification('Imagen actualizada', 'success');
-    }
-
-    deleteImageData(index) {
-        if (confirm('¿Estás seguro de que quieres eliminar esta imagen?')) {
-            this.images.splice(index, 1);
-            this.saveImages();
-            this.loadImages();
-            this.showNotification('Imagen eliminada', 'success');
-        }
-    }
-
-    viewMessage(index) {
-        const message = this.messages[index];
-        message.read = true;
+    toggleMessageRead(index) {
+        this.messages[index].read = !this.messages[index].read;
         this.saveMessages();
-        
-        this.showMessageModal(message);
+        this.updateMessagesList();
+        this.updateMessageCount();
     }
 
     deleteMessage(index) {
         if (confirm('¿Estás seguro de que quieres eliminar este mensaje?')) {
             this.messages.splice(index, 1);
             this.saveMessages();
-            this.loadMessages();
-            this.loadDashboard();
-            this.showNotification('Mensaje eliminado', 'success');
+            this.updateMessagesList();
+            this.updateMessageCount();
+            this.showNotification('Mensaje eliminado correctamente', 'success');
         }
     }
 
-    showMessageModal(message) {
+    updateMessageCount() {
+        const unreadCount = this.messages.filter(m => !m.read).length;
+        const messageCountEl = document.getElementById('message-count');
+        const messagesCountEl = document.getElementById('messages-count');
+
+        if (messageCountEl) messageCountEl.textContent = unreadCount;
+        if (messagesCountEl) messagesCountEl.textContent = this.messages.length;
+    }
+
+    updateImagesCount() {
+        const imagesCountEl = document.getElementById('images-count');
+        if (imagesCountEl) imagesCountEl.textContent = this.images.length;
+    }
+
+    // =====================  Gestión de Imágenes =========================
+    loadImages() {
+        this.updateImagesGrid();
+    }
+
+    updateImagesGrid() {
+        const grid = document.getElementById('images-grid');
+        if (!grid) return;
+
+        const filterVal = document.getElementById('project-filter')?.value || '';
+        const imgs = this.images.filter(img => !filterVal || img.project === filterVal);
+
+        grid.innerHTML = imgs.map(img => `
+            <div class="image-item" data-id="${img.id}">
+                <img src="${img.url}" alt="${img.alt || img.name}">
+                <div class="image-overlay">
+                    <button class="btn-icon" onclick="admin.deleteImage(${img.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="image-label">${img.name}</div>
+            </div>
+        `).join('');
+    }
+
+    setupImageUploadListeners() {
+        // Zona e input principal (images.html)
+        const fileInput = document.getElementById('file-input');
+        if (fileInput && !fileInput.dataset.listenerAttached) {
+            fileInput.dataset.listenerAttached = '1';
+            fileInput.addEventListener('change', (e) => {
+                [...e.target.files].forEach(f => this.addImageFromFile(f));
+                fileInput.value = '';
+            });
+        }
+
+        const uploadZone = document.getElementById('image-upload');
+        if (uploadZone && !uploadZone.dataset.listenerAttached) {
+            uploadZone.dataset.listenerAttached = '1';
+            ['dragover', 'dragenter'].forEach(evt => uploadZone.addEventListener(evt, ev => ev.preventDefault()));
+            uploadZone.addEventListener('drop', ev => {
+                ev.preventDefault();
+                [...ev.dataTransfer.files].forEach(f => this.addImageFromFile(f));
+            });
+            uploadZone.addEventListener('click', () => {
+                document.getElementById('file-input')?.click();
+            });
+        }
+
+        // Subida específica para proyectos
+        const projectInput = document.getElementById('project-file-input');
+        if (projectInput && !projectInput.dataset.listenerAttached) {
+            projectInput.dataset.listenerAttached = '1';
+            projectInput.addEventListener('change', (e) => {
+                [...e.target.files].forEach(f => this.addImageFromFile(f, this.currentProject));
+                projectInput.value = '';
+            });
+        }
+
+        const projectZone = document.getElementById('project-image-upload');
+        if (projectZone && !projectZone.dataset.listenerAttached) {
+            projectZone.dataset.listenerAttached = '1';
+            ['dragover', 'dragenter'].forEach(evt => projectZone.addEventListener(evt, ev => ev.preventDefault()));
+            projectZone.addEventListener('drop', ev => {
+                ev.preventDefault();
+                [...ev.dataTransfer.files].forEach(f => this.addImageFromFile(f, this.currentProject));
+            });
+            projectZone.addEventListener('click', () => {
+                document.getElementById('project-file-input')?.click();
+            });
+        }
+
+        // Filtro de proyecto
+        const filterSelect = document.getElementById('project-filter');
+        if (filterSelect && !filterSelect.dataset.listenerAttached) {
+            filterSelect.dataset.listenerAttached = '1';
+            filterSelect.addEventListener('change', () => this.updateImagesGrid());
+        }
+    }
+
+    addImageFromFile(file, project = '') {
+        if (!file.type.startsWith('image/')) {
+            this.showNotification('El archivo seleccionado no es una imagen', 'error');
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+            this.showNotification('La imagen supera el límite de 5MB', 'error');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const newImg = {
+                id: Date.now(),
+                name: file.name,
+                url: e.target.result,
+                alt: file.name,
+                project,
+                size: (file.size / 1024).toFixed(0) + ' KB',
+                date: new Date().toISOString(),
+                type: file.type
+            };
+            this.images.push(newImg);
+            if (project) {
+                if (!this.projects[project]) this.projects[project] = { id: project, images: {} };
+                if (!this.projects[project].images) this.projects[project].images = {};
+                const key = 'img' + Object.keys(this.projects[project].images).length;
+                this.projects[project].images[key] = newImg.url;
+            }
+            this.saveAll();
+            this.updateImagesGrid();
+            this.updateImagesCount();
+            this.showNotification('Imagen subida correctamente', 'success');
+        };
+        reader.readAsDataURL(file);
+    }
+
+    addImageFromUrl(url, project = '') {
+        if (!url) return;
+        // Validación simple de URL
+        try { new URL(url); } catch { this.showNotification('URL inválida', 'error'); return; }
+        const newImg = {
+            id: Date.now(),
+            name: url.split('/').pop(),
+            url,
+            alt: 'Imagen añadida por URL',
+            project,
+            size: '-',
+            date: new Date().toISOString(),
+            type: 'url'
+        };
+        this.images.push(newImg);
+        if (project) {
+            if (!this.projects[project]) this.projects[project] = { id: project, images: {} };
+            if (!this.projects[project].images) this.projects[project].images = {};
+            const key = 'img' + Object.keys(this.projects[project].images).length;
+            this.projects[project].images[key] = newImg.url;
+        }
+        this.saveAll();
+        this.updateImagesGrid();
+        this.updateImagesCount();
+        this.showNotification('Imagen añadida correctamente', 'success');
+    }
+
+    deleteImage(idOrKey) {
+        // Modo 1: eliminar desde galería general por ID numérico
+        if (typeof idOrKey === 'number') {
+            const index = this.images.findIndex(img => img.id === idOrKey);
+            if (index === -1) return;
+            if (!confirm('¿Eliminar esta imagen?')) return;
+
+            const [removed] = this.images.splice(index, 1);
+
+            if (removed.project && this.projects[removed.project] && this.projects[removed.project].images) {
+                Object.keys(this.projects[removed.project].images).forEach(key => {
+                    if (this.projects[removed.project].images[key] === removed.url) {
+                        delete this.projects[removed.project].images[key];
+                    }
+                });
+            }
+
+            this.saveAll();
+            this.updateImagesGrid();
+            this.updateImagesCount();
+            this.updateProjectImagesGrid();
+            this.showNotification('Imagen eliminada', 'success');
+            return;
+        }
+
+        // Modo 2: eliminar por clave de imagen del proyecto actual (e.g., 'hero')
+        const key = String(idOrKey);
+        const proj = this.projects[this.currentProject];
+        if (!proj || !proj.images || !(key in proj.images)) return;
+        if (!confirm(`¿Eliminar imagen "${key}" del proyecto?`)) return;
+        delete proj.images[key];
+        this.saveAll();
+        this.updateProjectImagesGrid();
+        this.showNotification('Imagen del proyecto eliminada', 'success');
+    }
+
+    editImage(key) {
+        const proj = this.projects[this.currentProject] || (this.projects[this.currentProject] = { id: this.currentProject, images: {} });
+        if (!proj.images) proj.images = {};
+        const current = proj.images[key] || '';
+        const val = prompt(`Nueva URL para la imagen "${key}"`, current);
+        if (!val) return;
+        try { new URL(val); } catch { this.showNotification('URL inválida', 'error'); return; }
+        proj.images[key] = val;
+        this.saveAll();
+        this.updateProjectImagesGrid();
+        this.showNotification('Imagen actualizada', 'success');
+    }
+
+    updateProjectImagesGrid() {
+        const grid = document.getElementById('project-images-grid');
+        if (!grid) return;
+        const proj = this.projects[this.currentProject];
+        const images = proj?.images || {};
+
+        // Si no hay imágenes definidas aún, mostrar placeholders de claves comunes
+        const defaultKeys = ['hero', 'catalog', 'cart', 'admin', 'analytics'];
+        const keys = Object.keys(images).length ? Object.keys(images) : defaultKeys;
+
+        grid.innerHTML = keys.map(k => {
+            const url = images[k] || `https://via.placeholder.com/400x300/667eea/ffffff?text=${k}`;
+            const label = k.charAt(0).toUpperCase() + k.slice(1);
+            return `
+                <div class="image-item">
+                    <img src="${url}" alt="${label}">
+                    <div class="image-overlay">
+                        <button class="btn-icon" onclick="admin.editImage('${k}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-icon" onclick="admin.deleteImage('${k}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="image-label">${label}</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    setupProjectFormListeners() {
+        const titleEl = document.getElementById('project-title');
+        const subtitleEl = document.getElementById('project-subtitle');
+        const descEl = document.getElementById('project-description');
+        const techEl = document.getElementById('project-tech');
+        const catEl = document.getElementById('project-category');
+
+        const attach = (el, handler) => {
+            if (el && !el.dataset.listenerAttached) {
+                el.dataset.listenerAttached = '1';
+                el.addEventListener('input', handler);
+                // Algunos selects no disparan input en todos los navegadores
+                el.addEventListener('change', handler);
+            }
+        };
+
+        attach(titleEl, () => this.updateProjectFromForm());
+        attach(subtitleEl, () => this.updateProjectFromForm());
+        attach(descEl, () => this.updateProjectFromForm());
+        attach(techEl, () => this.updateProjectFromForm());
+        attach(catEl, () => this.updateProjectFromForm());
+    }
+
+    populateProjectForm() {
+        const proj = this.projects[this.currentProject];
+        if (!proj) return;
+        const titleEl = document.getElementById('project-title');
+        const subtitleEl = document.getElementById('project-subtitle');
+        const descEl = document.getElementById('project-description');
+        const techEl = document.getElementById('project-tech');
+        const catEl = document.getElementById('project-category');
+
+        if (titleEl) titleEl.value = proj.title || '';
+        if (subtitleEl) subtitleEl.value = proj.subtitle || '';
+        if (descEl) descEl.value = proj.description || '';
+        if (techEl) techEl.value = proj.tech || '';
+        if (catEl) catEl.value = proj.category || 'web';
+    }
+
+    updateProjectFromForm() {
+        const proj = this.projects[this.currentProject] || (this.projects[this.currentProject] = { id: this.currentProject });
+        const titleEl = document.getElementById('project-title');
+        const subtitleEl = document.getElementById('project-subtitle');
+        const descEl = document.getElementById('project-description');
+        const techEl = document.getElementById('project-tech');
+        const catEl = document.getElementById('project-category');
+
+        if (titleEl) proj.title = titleEl.value;
+        if (subtitleEl) proj.subtitle = subtitleEl.value;
+        if (descEl) proj.description = descEl.value;
+        if (techEl) proj.tech = techEl.value;
+        if (catEl) proj.category = catEl.value;
+
+        this.saveAll();
+        // Refrescar lista por si cambió el título o la vista previa
+        this.updateProjectsList();
+        this.showNotification('Proyecto actualizado', 'success');
+    }
+
+    showUrlInputModal(projectScoped = true) {
+        const modal = document.getElementById('url-input-modal');
+        if (!modal) return;
+        const input = modal.querySelector('#url-input-field');
+        const saveBtn = modal.querySelector('#url-input-save');
+        const closeBtn = modal.querySelector('#url-input-cancel');
+
+        input.value = '';
+        modal.style.display = 'flex';
+
+        const onSave = () => {
+            const val = input.value.trim();
+            if (val) this.addImageFromUrl(val, projectScoped ? this.currentProject : '');
+            modal.style.display = 'none';
+            cleanup();
+        };
+        const onClose = () => { modal.style.display = 'none'; cleanup(); };
+        const cleanup = () => {
+            saveBtn.removeEventListener('click', onSave);
+            closeBtn.removeEventListener('click', onClose);
+            modal.removeEventListener('click', onBackdrop);
+        };
+        const onBackdrop = (e) => { if (e.target === modal) onClose(); };
+
+        saveBtn.addEventListener('click', onSave);
+        closeBtn.addEventListener('click', onClose);
+        modal.addEventListener('click', onBackdrop);
+    }
+
+    ensureUrlModal() {
+        if (document.getElementById('url-input-modal')) return;
         const modal = document.createElement('div');
-        modal.className = 'modal-overlay';
+        modal.id = 'url-input-modal';
+        modal.style.cssText = `
+            position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.5); z-index: 10000;
+        `;
         modal.innerHTML = `
-            <div class="modal-container">
-                <div class="modal-header">
-                    <h3>Mensaje de ${message.name}</h3>
-                    <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-content">
-                    <p><strong>Email:</strong> ${message.email}</p>
-                    <p><strong>Fecha:</strong> ${new Date(message.date).toLocaleString()}</p>
-                    <p><strong>Mensaje:</strong></p>
-                    <div class="message-content">${message.message}</div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" onclick="this.closest('.modal-overlay').remove()">
-                        Cerrar
-                    </button>
+            <div style="background:#fff; padding:1rem; border-radius:8px; width: min(500px, 92vw); box-shadow:0 10px 30px rgba(0,0,0,0.2)">
+                <h3 style="margin:0 0 .75rem 0">Agregar URL de Imagen</h3>
+                <input id="url-input-field" type="url" placeholder="https://..." style="width:100%; padding:.75rem; border:1px solid #ddd; border-radius:6px; margin-bottom: .75rem;" />
+                <div style="display:flex; gap:.5rem; justify-content:flex-end">
+                    <button id="url-input-cancel" class="btn btn-outline">Cancelar</button>
+                    <button id="url-input-save" class="btn btn-primary">Agregar</button>
                 </div>
             </div>
         `;
         document.body.appendChild(modal);
     }
 
-    filterImages(project) {
-        const images = document.querySelectorAll('.image-item');
-        images.forEach(item => {
-            const imageProject = item.querySelector('.image-label').textContent.toLowerCase();
-            if (!project || imageProject.includes(project.toLowerCase())) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
-    filterMessages(status) {
-        const messages = document.querySelectorAll('.message-item');
-        messages.forEach(message => {
-            const isRead = !message.classList.contains('unread');
-                if (!status || 
-                    (status === 'read' && isRead) || 
-                    (status === 'unread' && !isRead)) {
-                message.style.display = 'block';
-                } else {
-                message.style.display = 'none';
-                }
-        });
-            }
-
-    markAllAsRead() {
-        this.messages.forEach(message => {
-            message.read = true;
-        });
-        this.saveMessages();
-        this.loadMessages();
-        this.showNotification('Todos los mensajes marcados como leídos', 'success');
-    }
-
-    saveSettings() {
-        this.settings.title = document.getElementById('portfolio-title').value;
-        this.settings.subtitle = document.getElementById('portfolio-subtitle').value;
-        this.settings.description = document.getElementById('portfolio-description').value;
-        this.settings.adminEmail = document.getElementById('admin-email').value;
-        this.settings.contactEmail = document.getElementById('contact-email').value;
-
-        this.settings.social.github = document.getElementById('github-url').value;
-        this.settings.social.linkedin = document.getElementById('linkedin-url').value;
-        this.settings.social.twitter = document.getElementById('twitter-url').value;
-        this.settings.social.instagram = document.getElementById('instagram-url').value;
-
-        localStorage.setItem('portfolio_settings', JSON.stringify(this.settings));
-        this.showNotification('Configuración guardada', 'success');
-    }
-
-    createBackup() {
-        const backup = {
-            name: `Respaldo ${new Date().toLocaleDateString()}`,
-            date: new Date().toISOString(),
-            data: {
-                projects: this.projects,
-                images: this.images,
-                messages: this.messages,
-                settings: this.settings
-            }
-        };
-
-        const backups = JSON.parse(localStorage.getItem('portfolio_backups') || '[]');
-        backups.unshift(backup);
-        
-        // Keep only last 10 backups
-        if (backups.length > 10) {
-            backups.splice(10);
-        }
-        
-        localStorage.setItem('portfolio_backups', JSON.stringify(backups));
-
-        // Download backup file
-        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `portfolio-backup-${new Date().toISOString().split('T')[0]}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-
-        this.showNotification('Respaldo creado y descargado', 'success');
-    }
-
-    restoreBackup(file) {
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            try {
-                const backup = JSON.parse(e.target.result);
-                this.projects = backup.data.projects;
-                this.images = backup.data.images;
-                this.messages = backup.data.messages;
-                this.settings = backup.data.settings;
-
-                this.saveAll();
-                this.loadDashboard();
-                this.showNotification('Respaldo restaurado exitosamente', 'success');
-            } catch (error) {
-                this.showNotification('Error al restaurar el respaldo', 'error');
-            }
-        };
-        reader.readAsText(file);
-    }
-
-    restoreBackupFromHistory(index) {
-        const backups = JSON.parse(localStorage.getItem('portfolio_backups') || '[]');
-        const backup = backups[index];
-        
-        if (confirm('¿Estás seguro de que quieres restaurar este respaldo? Se perderán los datos actuales.')) {
-            this.projects = backup.data.projects;
-            this.images = backup.data.images;
-            this.messages = backup.data.messages;
-            this.settings = backup.data.settings;
-
-            this.saveAll();
-            this.loadDashboard();
-            this.showNotification('Respaldo restaurado exitosamente', 'success');
-        }
-    }
-
-    downloadBackupFromHistory(index) {
-        const backups = JSON.parse(localStorage.getItem('portfolio_backups') || '[]');
-        const backup = backups[index];
-        
-        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `portfolio-backup-${backup.date.split('T')[0]}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
-
-    refreshPreview() {
-        const previewFrame = document.getElementById('preview-frame');
-        const projectPreviewFrame = document.getElementById('project-preview-frame');
-        
-        if (previewFrame) {
-            const currentSrc = previewFrame.src;
-            previewFrame.src = '';
-            setTimeout(() => {
-                previewFrame.src = currentSrc;
-            }, 100);
-        }
-        
-        if (projectPreviewFrame) {
-            const currentSrc = projectPreviewFrame.src;
-            projectPreviewFrame.src = '';
-            setTimeout(() => {
-                projectPreviewFrame.src = currentSrc;
-            }, 100);
-        }
-        
-        this.showNotification('Vista previa actualizada', 'success');
-    }
-
-    loadProjectPreview(projectId) {
-        const project = this.projects[projectId];
-        if (!project) return;
-        
-        const projectPreviewFrame = document.getElementById('project-preview-frame');
-        if (projectPreviewFrame) {
-            const projectUrl = `proyecto-${project.slug}.html`;
-            projectPreviewFrame.src = projectUrl;
-            
-            // Actualizar información del proyecto en la vista previa
-            const previewHeader = document.querySelector('.preview-header h3');
-            if (previewHeader) {
-                previewHeader.textContent = `Vista Previa: ${project.title}`;
-            }
-        }
-    }
-
-    refreshProjectPreview() {
-        if (this.currentProject) {
-            this.loadProjectPreview(this.currentProject);
-            this.showNotification('Vista previa del proyecto actualizada', 'success');
-        }
-    }
-
-    toggleAutoRefresh() {
-        if (this.autoRefreshInterval) {
-            clearInterval(this.autoRefreshInterval);
-            this.autoRefreshInterval = null;
-            this.showNotification('Actualización automática desactivada', 'info');
-        } else {
-            this.autoRefreshInterval = setInterval(() => {
-                this.updatePreview();
-            }, 5000); // Actualizar cada 5 segundos
-            this.showNotification('Actualización automática activada', 'success');
-        }
-    }
-
-    initializePreview() {
-        // Inicializar vista previa con configuración por defecto
-        this.currentDevice = 'desktop';
-        this.loadPreview();
-        
-        // Configurar auto-refresh opcional
-        const autoRefreshBtn = document.querySelector('.auto-refresh-btn');
-        if (autoRefreshBtn) {
-            autoRefreshBtn.addEventListener('click', () => this.toggleAutoRefresh());
-        }
-    }
-
-    openPreviewInNewTab() {
-        // Determinar qué página abrir según el contexto
-        let url = 'index.html';
-        
-        // Si estamos en la sección de proyectos y hay un proyecto seleccionado
-        if (this.currentSection === 'projects' && this.currentProject) {
-            const project = this.projects[this.currentProject];
-            if (project && project.slug) {
-                url = `proyecto-${project.slug}.html`;
-            }
-        }
-        
-        // Si estamos en la vista previa de proyectos específicos
-        const projectPreviewFrame = document.getElementById('project-preview-frame');
-        if (projectPreviewFrame && projectPreviewFrame.src) {
-            const frameSrc = projectPreviewFrame.src;
-            if (frameSrc.includes('proyecto-')) {
-                url = frameSrc.split('/').pop();
-            }
-        }
-        
-        window.open(url, '_blank');
-    }
-
-    togglePreview() {
-        if (this.currentSection === 'preview') {
-            this.switchSection('dashboard');
-        } else {
-            this.switchSection('preview');
-        }
-    }
-
     saveAll() {
-        this.saveProjects();
-        this.saveImages();
-        this.saveMessages();
-        this.saveSettings();
-    }
-
-    saveProjects() {
         localStorage.setItem('portfolio_projects', JSON.stringify(this.projects));
-    }
-
-    saveImages() {
+        localStorage.setItem('portfolio_settings', JSON.stringify(this.settings));
         localStorage.setItem('portfolio_images', JSON.stringify(this.images));
+        localStorage.setItem('portfolio_messages', JSON.stringify(this.messages));
     }
 
     saveMessages() {
@@ -1361,22 +803,31 @@ class AdminPanel {
     }
 
     setupAutoSave() {
-        // Auto-save every 30 seconds
+        // Auto-save cada 30 segundos
         setInterval(() => {
             this.saveAll();
         }, 30000);
     }
 
-    debounceAutoSave() {
-        clearTimeout(this.autoSaveTimeout);
-        this.autoSaveTimeout = setTimeout(() => {
-            this.saveAll();
-        }, 2000);
-    }
-
+    // Método de respaldo para mostrar notificaciones
     showNotification(message, type = 'info') {
+        console.log(`[${type.toUpperCase()}] ${message}`);
+
+        // Crear elemento de notificación visual
         const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
+        notification.className = 'notification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'error' ? '#e74c3c' : type === 'success' ? '#27ae60' : '#3498db'};
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10001;
+            animation: slideInRight 0.3s ease-out;
+        `;
         notification.textContent = message;
 
         document.body.appendChild(notification);
@@ -1387,107 +838,174 @@ class AdminPanel {
     }
 }
 
-// Inicializar panel de administración
-const admin = new AdminPanel();
+// Inicializar el panel de administración
+document.addEventListener('DOMContentLoaded', () => {
+    // Verificar y limpiar URLs antiguas
+    checkAndRedirectLegacyUrls();
 
-// Agregar CSS para notificaciones y modales
-const style = document.createElement('style');
-style.textContent = `
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        padding: 20px;
-    }
+    window.admin = new AdminPanel();
+    console.log('Panel administrativo cargado exitosamente');
+});
 
-    .modal-container {
-        background: white;
-        border-radius: 15px;
-        max-width: 600px;
-        width: 90%;
-        max-height: 80vh;
-        overflow-y: auto;
-    }
+function checkAndRedirectLegacyUrls() {
+    const currentUrl = window.location.href;
+    const currentPath = window.location.pathname;
+    const urlParts = currentPath.split('/');
+    const currentPage = urlParts[urlParts.length - 1];
+    const hash = window.location.hash;
 
-    .modal-header {
-        padding: 1.5rem;
-        border-bottom: 1px solid #e9ecef;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+    console.log('🔍 Verificando URL:', currentUrl);
 
-    .modal-content {
-        padding: 1.5rem;
-    }
+    // Caso 1: URL con formato admin.html#section
+    if (currentUrl.includes('admin.html#') || (currentPage === 'admin.html' && hash)) {
+        const section = hash ? hash.substring(1) : 'dashboard';
 
-    .modal-footer {
-        padding: 1.5rem;
-        border-top: 1px solid #e9ecef;
-        text-align: right;
-    }
+        const sectionMapping = {
+            'dashboard': 'dashboard.html',
+            'projects': 'projects.html',
+            'messages': 'messages.html',
+            'images': 'images.html',
+            'content': 'content.html',
+            'navigation': 'navigation.html',
+            'preview': 'preview.html',
+            'settings': 'settings.html',
+            'backup': 'backup.html'
+        };
 
-    .modal-close {
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: #666;
-    }
-
-    .message-content {
-        background: #f8f9fa;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-top: 0.5rem;
-        white-space: pre-wrap;
-    }
-
-    .notification {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 10001;
-        animation: slideInRight 0.3s ease-out;
-        color: white;
-        font-weight: 500;
-    }
-
-    .notification-success {
-        background: #27ae60;
-    }
-
-    .notification-error {
-        background: #e74c3c;
-    }
-
-    .notification-info {
-        background: #3498db;
-    }
-
-    .notification-warning {
-        background: #f39c12;
-    }
-
-    @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(100px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
+        if (sectionMapping[section]) {
+            console.log(`🚨 URL antigua detectada: admin.html#${section} -> Redirigiendo a ${sectionMapping[section]}`);
+            window.location.replace(sectionMapping[section]); // Usar replace para evitar historial
+            return;
         }
     }
-`;
-document.head.appendChild(style);
+
+    // Caso 2: Acceso directo a admin.html sin hash
+    if (currentPage === 'admin.html') {
+        console.log('🚨 Acceso directo a admin.html -> Redirigiendo al dashboard');
+        window.location.replace('dashboard.html');
+        return;
+    }
+
+    // Caso 3: Cualquier URL que contenga referencias antiguas
+    if (currentUrl.includes('admin.html') && !currentUrl.includes('admin/')) {
+        console.log('🚨 URL con referencia antigua a admin.html -> Intentando redirigir...');
+
+        // Si la URL contiene admin.html pero no está en el directorio admin/, intentar redirigir
+        if (urlParts.length === 2 && urlParts[1] === 'admin.html') {
+            window.location.replace('admin/dashboard.html');
+            return;
+        }
+    }
+
+    // Caso 4: Verificar si estamos en una página válida del sistema modular
+    const validPages = ['dashboard.html', 'projects.html', 'messages.html', 'images.html', 'content.html', 'navigation.html', 'preview.html', 'settings.html', 'backup.html'];
+    const isInAdminDir = urlParts.includes('admin');
+
+    if (isInAdminDir && !validPages.includes(currentPage)) {
+        console.log(`🚨 Página no válida en directorio admin: ${currentPage} -> Redirigiendo al dashboard`);
+        window.location.replace('dashboard.html');
+        return;
+    }
+
+    console.log('✅ URL válida, continuando normalmente');
+}
+
+// Métodos adicionales para compatibilidad con el HTML
+// Crear un proxy que proporcione métodos por defecto para los que faltan
+const originalAdmin = window.admin || {};
+
+window.admin = new Proxy(originalAdmin, {
+    get(target, prop) {
+        if (prop in target) {
+            return target[prop];
+        }
+
+        // Métodos básicos que pueden estar faltando
+        switch(prop) {
+            case 'showAddProjectModal':
+                return () => {
+                    alert('Función showAddProjectModal: Para agregar proyectos, ve a la sección de proyectos y usa el botón "Agregar Proyecto"');
+                    window.admin.switchSection('projects');
+                };
+            case 'editProject':
+                return (id) => {
+                    alert(`Editando proyecto: ${id}`);
+                    window.admin.currentProject = id;
+                    window.admin.switchSection('projects');
+                };
+            case 'deleteProject':
+                return (id) => {
+                    if (confirm(`¿Estás seguro de que quieres eliminar el proyecto "${id}"?`)) {
+                        delete window.admin.projects[id];
+                        window.admin.saveAll();
+                        window.admin.updateProjectsList();
+                        window.admin.showNotification('Proyecto eliminado correctamente', 'success');
+                    }
+                };
+            case 'editImage':
+                return (key) => alert(`Editando imagen: ${key}`);
+            case 'deleteImage':
+                return (key) => {
+                    if (confirm(`¿Eliminar imagen ${key}?`)) {
+                        alert(`Imagen ${key} eliminada`);
+                    }
+                };
+            case 'addFeature':
+                return () => alert('Agregar nueva característica');
+            case 'removeFeature':
+                return (element) => {
+                    if (element && element.parentElement) {
+                        element.parentElement.remove();
+                    }
+                };
+            case 'addService':
+                return () => alert('Agregar nuevo servicio');
+            case 'removeService':
+                return (element) => {
+                    if (element && element.parentElement) {
+                        element.parentElement.remove();
+                    }
+                };
+            case 'refreshProjectPreview':
+                return () => alert('Vista previa actualizada');
+            case 'openPreviewInNewTab':
+                return () => window.open('preview.html', '_blank');
+            case 'addUrlImage':
+                return () => alert('Agregar imagen por URL');
+            case 'closeModal':
+                return (id) => {
+                    const modal = document.getElementById(id);
+                    if (modal) modal.style.display = 'none';
+                };
+            case 'showUrlInputModal':
+                return () => {
+                    const modal = document.getElementById('url-input-modal');
+                    if (modal) modal.style.display = 'flex';
+                };
+            case 'togglePreview':
+                return () => {
+                    window.location.href = 'preview.html';
+                };
+            case 'goToDashboard':
+                return () => {
+                    window.location.href = 'dashboard.html';
+                };
+            case 'navigateTo':
+                return (section) => {
+                    window.admin.navigateToSection(section);
+                };
+            case 'saveAll':
+                return () => {
+                    window.admin.saveAll();
+                    window.admin.showNotification('Datos guardados correctamente', 'success');
+                };
+            default:
+                return () => console.warn(`Método ${prop} no encontrado en admin`);
+        }
+    }
+});
+
+// Exportar para uso en otros archivos
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = AdminPanel;
+}

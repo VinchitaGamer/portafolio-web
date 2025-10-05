@@ -198,7 +198,7 @@
                             <h3>Proyectos</h3>
                             <div class="project-item active" data-project="ecommerce">
                                 <div class="project-preview">
-                                    <img src="img/projects/ecommerce/hero.svg" alt="E-Commerce">
+                                    <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=E-Commerce" alt="E-Commerce">
                                 </div>
                                 <div class="project-info">
                                     <h4>Plataforma E-Commerce</h4>
@@ -215,7 +215,7 @@
                             </div>
                             <div class="project-item" data-project="banking">
                                 <div class="project-preview">
-                                    <img src="img/projects/banking/hero.svg" alt="Banking">
+                                    <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Banking" alt="Banking">
                                 </div>
                                 <div class="project-info">
                                     <h4>Aplicación Bancaria</h4>
@@ -293,13 +293,19 @@
                                     <div class="image-upload-area">
                                         <div class="upload-zone" id="project-image-upload">
                                             <i class="fas fa-cloud-upload-alt"></i>
-                                            <p>Arrastra imágenes aquí o haz clic para seleccionar</p>
+                                            <p>Arrastra imágenes aquí, haz clic para seleccionar archivos, o ingresa URLs directamente</p>
                                             <input type="file" id="project-file-input" multiple accept="image/*" style="display: none;">
+                                        </div>
+                                        <div class="url-input-section">
+                                            <button class="btn btn-outline" onclick="admin.showUrlInputModal()">
+                                                <i class="fas fa-link"></i>
+                                                Agregar URL de Imagen
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="images-grid" id="project-images-grid">
                                         <div class="image-item">
-                                            <img src="img/projects/ecommerce/hero.svg" alt="Hero">
+                                            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Hero+Image" alt="Hero">
                                             <div class="image-overlay">
                                                 <button class="btn-icon" onclick="admin.editImage('hero')">
                                                     <i class="fas fa-edit"></i>
@@ -311,7 +317,7 @@
                                             <div class="image-label">Hero</div>
                                         </div>
                                         <div class="image-item">
-                                            <img src="img/projects/ecommerce/catalog.svg" alt="Catalog">
+                                            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Catalog" alt="Catalog">
                                             <div class="image-overlay">
                                                 <button class="btn-icon" onclick="admin.editImage('catalog')">
                                                     <i class="fas fa-edit"></i>
@@ -835,6 +841,51 @@
                     <div class="modal-actions">
                         <button type="button" class="btn btn-secondary" onclick="admin.closeModal('add-project-modal')">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Agregar Proyecto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar URL de imagen -->
+    <div id="url-input-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Agregar URL de Imagen</h3>
+                <button class="modal-close" onclick="admin.closeModal('url-input-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <form id="url-image-form">
+                    <div class="form-group">
+                        <label for="image-key">Nombre de la imagen</label>
+                        <select id="image-key" required>
+                            <option value="hero">Hero (Imagen principal)</option>
+                            <option value="catalog">Catalog (Catálogo)</option>
+                            <option value="cart">Cart (Carrito)</option>
+                            <option value="admin">Admin (Panel administrativo)</option>
+                            <option value="analytics">Analytics (Dashboard)</option>
+                            <option value="mobile">Mobile (Vista móvil)</option>
+                            <option value="login">Login (Inicio de sesión)</option>
+                            <option value="dashboard">Dashboard (Panel principal)</option>
+                            <option value="transfer">Transfer (Transferencias)</option>
+                            <option value="payments">Payments (Pagos)</option>
+                            <option value="history">History (Historial)</option>
+                            <option value="settings">Settings (Configuración)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="image-url">URL de la imagen</label>
+                        <input type="url" id="image-url" placeholder="https://ejemplo.com/imagen.jpg" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image-alt">Texto alternativo (opcional)</label>
+                        <input type="text" id="image-alt" placeholder="Descripción de la imagen">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" onclick="admin.closeModal('url-input-modal')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Agregar Imagen</button>
                     </div>
                 </form>
             </div>

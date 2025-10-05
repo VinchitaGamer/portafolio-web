@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigiendo - Panel de Administración</title>
+    <script>
+        // Detectar y redirigir URLs antiguas inmediatamente
+        (function() {
+            const currentUrl = window.location.href;
+            const currentPath = window.location.pathname;
+            const hash = window.location.hash;
+
+            console.log('🔄 Página de respaldo activada para URL:', currentUrl);
+
+            // Caso 1: Si la URL contiene admin.html con hash, redirigir
+            if (currentUrl.includes('admin.html#') || (currentPath.includes('admin.html') && hash)) {
+                const section = hash ? hash.substring(1) : 'dashboard';
+
+                const sectionMapping = {
+                    'dashboard': 'admin/dashboard.html',
+                    'projects': 'admin/projects.html',
+                    'messages': 'admin/messages.html',
+                    'images': 'admin/images.html',
+                    'content': 'admin/content.html',
+                    'navigation': 'admin/navigation.html',
+                    'preview': 'admin/preview.html',
+                    'settings': 'admin/settings.html',
+                    'backup': 'admin/backup.html'
+                };
+
+                if (sectionMapping[section]) {
+                    console.log(`🚨 Redirigiendo desde respaldo: ${section} -> ${sectionMapping[section]}`);
+                    window.location.replace(sectionMapping[section]);
+                    return;
+                }
+            }
+
+            // Caso 2: Si es acceso directo a admin.html, redirigir al dashboard
+            if (currentPath.includes('admin.html')) {
+                console.log('🚨 Redirigiendo admin.html al dashboard');
+                window.location.replace('admin/dashboard.html');
+                return;
+            }
+
+            // Caso 3: Cualquier otra URL sospechosa en el directorio raíz
+            if (currentUrl.includes('admin.html') || (currentPath === '/' && currentUrl.includes('#'))) {
+                console.log('🚨 URL sospechosa detectada, redirigiendo al dashboard');
+                window.location.replace('admin/dashboard.html');
+                return;
+            }
+
+            // Si no es una URL antigua, redirigir al dashboard por seguridad
+            console.log('🔒 URL no reconocida, redirigiendo al dashboard por seguridad');
+            window.location.replace('admin/dashboard.html');
+        })();
+    </script>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;">
+        <div style="text-align: center;">
+            <h2>🔄 Redirigiendo...</h2>
+            <p>Si no eres redirigido automáticamente, <a href="admin/dashboard.html">haz clic aquí</a></p>
+        </div>
+    </div>
+</body>
+</html>

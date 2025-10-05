@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Contenido - Panel de Administración</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar común -->
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2><i class="fas fa-crown"></i> Admin Panel</h2>
+                <p>Control Total del Portafolio</p>
+            </div>
+            <div class="admin-nav">
+                <a href="dashboard.html" class="nav-item" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="projects.html" class="nav-item" data-section="projects">
+                    <i class="fas fa-project-diagram"></i>
+                    Gestión de Proyectos
+                </a>
+                <a href="messages.html" class="nav-item" data-section="messages">
+                    <i class="fas fa-envelope"></i>
+                    Mensajes
+                    <span class="notification-badge" id="message-count">0</span>
+                </a>
+                <a href="images.html" class="nav-item" data-section="images">
+                    <i class="fas fa-images"></i>
+                    Gestión de Imágenes
+                </a>
+                <a href="content.html" class="nav-item active" data-section="content">
+                    <i class="fas fa-edit"></i>
+                    Editor de Contenido
+                </a>
+                <a href="navigation.html" class="nav-item" data-section="navigation">
+                    <i class="fas fa-bars"></i>
+                    Navegación
+                </a>
+                <a href="preview.html" class="nav-item" data-section="preview">
+                    <i class="fas fa-eye"></i>
+                    Vista Previa
+                </a>
+                <a href="settings.html" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    Configuración
+                </a>
+                <a href="backup.html" class="nav-item" data-section="backup">
+                    <i class="fas fa-database"></i>
+                    Respaldo
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header común -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1 class="admin-title">Editor de Contenido Global</h1>
+                    <p class="admin-subtitle">Modifica textos, configuraciones y contenido de toda la página</p>
+                </div>
+                <div class="admin-user">
+                    <div class="user-info">
+                        <p class="user-name" id="user-name">Cargando...</p>
+                        <p class="user-role" id="user-role">Administrador</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline" onclick="admin.togglePreview()">
+                            <i class="fas fa-eye"></i>
+                            Vista Previa
+                        </button>
+                        <button class="btn btn-outline" onclick="admin.saveAll()">
+                            <i class="fas fa-save"></i>
+                            Guardar Todo
+                        </button>
+                        <button class="logout-btn" onclick="auth.logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Section -->
+            <section id="content-section" class="admin-section active">
+                <div class="section-header">
+                    <h2>Editor de Contenido Global</h2>
+                    <p>Modifica textos, configuraciones y contenido de toda la página</p>
+                </div>
+
+                <div class="content-editor-container">
+                    <div class="content-sidebar">
+                        <div class="content-sections">
+                            <h3>Secciones</h3>
+                            <div class="section-item active" data-section="home">
+                                <i class="fas fa-home"></i>
+                                <span>Página Principal</span>
+                            </div>
+                            <div class="section-item" data-section="about">
+                                <i class="fas fa-user"></i>
+                                <span>Acerca de</span>
+                            </div>
+                            <div class="section-item" data-section="services">
+                                <i class="fas fa-cogs"></i>
+                                <span>Servicios</span>
+                            </div>
+                            <div class="section-item" data-section="contact">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contacto</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-main">
+                        <div id="home-content" class="content-section active">
+                            <h3>Página Principal</h3>
+                            <div class="form-group">
+                                <label for="home-title">Título Principal</label>
+                                <input type="text" id="home-title" value="Jhon Desarrollador">
+                            </div>
+                            <div class="form-group">
+                                <label for="home-subtitle">Subtítulo</label>
+                                <input type="text" id="home-subtitle" value="Desarrollador de Software Freelance">
+                            </div>
+                            <div class="form-group">
+                                <label for="home-description">Descripción</label>
+                                <textarea id="home-description" rows="4">Creo experiencias digitales hermosas, funcionales y centradas en el usuario. Especializado en desarrollo web moderno y aplicaciones móviles.</textarea>
+                            </div>
+                        </div>
+
+                        <div id="about-content" class="content-section">
+                            <h3>Acerca de</h3>
+                            <div class="form-group">
+                                <label for="about-title">Título</label>
+                                <input type="text" id="about-title" value="Acerca de Mí">
+                            </div>
+                            <div class="form-group">
+                                <label for="about-description">Descripción</label>
+                                <textarea id="about-description" rows="6">Soy un desarrollador apasionado con más de 5 años de experiencia creando soluciones digitales innovadoras...</textarea>
+                            </div>
+                        </div>
+
+                        <div id="services-content" class="content-section">
+                            <h3>Servicios</h3>
+                            <div class="services-list" id="services-list">
+                                <div class="service-item">
+                                    <input type="text" value="Desarrollo Web" placeholder="Nombre del servicio">
+                                    <textarea placeholder="Descripción del servicio">Desarrollo de sitios web modernos y responsivos</textarea>
+                                    <button class="btn-icon" onclick="admin.removeService(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="service-item">
+                                    <input type="text" value="Aplicaciones Móviles" placeholder="Nombre del servicio">
+                                    <textarea placeholder="Descripción del servicio">Desarrollo de aplicaciones móviles nativas e híbridas</textarea>
+                                    <button class="btn-icon" onclick="admin.removeService(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline" onclick="admin.addService()">
+                                <i class="fas fa-plus"></i>
+                                Agregar Servicio
+                            </button>
+                        </div>
+
+                        <div id="contact-content" class="content-section">
+                            <h3>Contacto</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contact-email">Email de Contacto</label>
+                                    <input type="email" id="contact-email" value="juan.desarrollador@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-phone">Teléfono</label>
+                                    <input type="tel" id="contact-phone" value="+1 (555) 123-4567">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-address">Dirección</label>
+                                <input type="text" id="contact-address" value="Ciudad, País">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>
