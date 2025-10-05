@@ -16,6 +16,7 @@
       if (!window.CMS) return;
       CMS.init({
         config: {
+          load_config_file: false,
           backend: { name: 'git-gateway', branch: 'main' },
           media_folder: 'img/uploads',
           public_folder: '/img/uploads',
