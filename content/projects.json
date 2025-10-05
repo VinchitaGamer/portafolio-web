@@ -31,5 +31,16 @@
     ],
     "category": "web",
     "icon": "fab fa-whatsapp"
+  },
+  {
+    "id": "prueba",
+    "title": "prueba",
+    "subtitle": "prueba",
+    "description": "prueba",
+    "tech": [
+      "Python"
+    ],
+    "category": "web",
+    "icon": "fab fa-whatsapp"
   }
 ]
