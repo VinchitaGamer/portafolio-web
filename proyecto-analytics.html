@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Análisis - Jhon Desarrollador</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Jhon Desarrollador</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="index.html#about" class="nav-link">Acerca de</a>
+                <a href="index.html#projects" class="nav-link">Proyectos</a>
+                <a href="index.html#services" class="nav-link">Servicios</a>
+                <a href="index.html#contact" class="nav-link">Contacto</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <div class="project-breadcrumb">
+                <a href="index.html">Inicio</a> / <a href="index.html#projects">Proyectos</a> / <span>Panel de Análisis</span>
+            </div>
+            <div class="project-title-section">
+                <h1 class="project-title">Panel de Análisis</h1>
+                <p class="project-subtitle">Dashboard interactivo para visualización de datos y métricas empresariales</p>
+                <div class="project-tech-stack">
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">Express</span>
+                    <span class="tech-tag">Chart.js</span>
+                    <span class="tech-tag">WebSocket</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <!-- Project Description -->
+                <div class="project-description">
+                    <h2>Descripción del Proyecto</h2>
+                    <p>
+                        Desarrollé un panel de análisis completo que permite a las empresas visualizar y 
+                        analizar sus datos de manera interactiva. El dashboard incluye múltiples tipos de 
+                        gráficos, métricas en tiempo real y herramientas de análisis avanzado.
+                    </p>
+                    
+                    <h3>Características Principales</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Gráficos interactivos con D3.js</li>
+                        <li><i class="fas fa-check"></i> Actualizaciones en tiempo real con WebSocket</li>
+                        <li><i class="fas fa-check"></i> Múltiples tipos de visualizaciones</li>
+                        <li><i class="fas fa-check"></i> Filtros avanzados y rangos de fecha</li>
+                        <li><i class="fas fa-check"></i> Exportación de reportes en PDF/Excel</li>
+                        <li><i class="fas fa-check"></i> Dashboard personalizable por usuario</li>
+                        <li><i class="fas fa-check"></i> Alertas automáticas basadas en umbrales</li>
+                        <li><i class="fas fa-check"></i> API REST para integración con otros sistemas</li>
+                    </ul>
+
+                    <h3>Desafíos Técnicos</h3>
+                    <p>
+                        El mayor desafío fue optimizar el rendimiento para manejar grandes volúmenes de datos 
+                        en tiempo real. Implementé técnicas de virtualización de datos y caching inteligente 
+                        para mantener la fluidez de la interfaz incluso con millones de registros.
+                    </p>
+
+                    <h3>Resultados</h3>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">85%</span>
+                            <span class="stat-label">Reducción en tiempo de análisis</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Usuarios concurrentes</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">99.5%</span>
+                            <span class="stat-label">Precisión en datos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Images -->
+                <div class="project-images">
+                    <h2>Capturas de Pantalla</h2>
+                    <div class="image-gallery">
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Dashboard+Principal" alt="Dashboard Principal" loading="lazy">
+                            <p class="image-caption">Vista general del dashboard con métricas principales</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Gráficos+Interactivos" alt="Gráficos Interactivos" loading="lazy">
+                            <p class="image-caption">Gráficos interactivos con zoom y filtros</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Análisis+Temporal" alt="Análisis Temporal" loading="lazy">
+                            <p class="image-caption">Análisis de tendencias temporales</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Reportes+Personalizados" alt="Reportes Personalizados" loading="lazy">
+                            <p class="image-caption">Generación de reportes personalizados</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Configuración+de+Alertas" alt="Configuración de Alertas" loading="lazy">
+                            <p class="image-caption">Panel de configuración de alertas automáticas</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Vista+Móvil" alt="Vista Móvil" loading="lazy">
+                            <p class="image-caption">Dashboard optimizado para dispositivos móviles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Actions -->
+    <section class="project-actions">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i>
+                    Ver Demo en Vivo
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fab fa-github"></i>
+                    Ver Código en GitHub
+                </a>
+                <a href="index.html#projects" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver a Proyectos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Jhon Desarrollador. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/project.js"></script>
+</body>
+</html>

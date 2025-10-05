@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Juegos Web - Jhon Desarrollador</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Jhon Desarrollador</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="index.html#about" class="nav-link">Acerca de</a>
+                <a href="index.html#projects" class="nav-link">Proyectos</a>
+                <a href="index.html#services" class="nav-link">Servicios</a>
+                <a href="index.html#contact" class="nav-link">Contacto</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <div class="project-breadcrumb">
+                <a href="index.html">Inicio</a> / <a href="index.html#projects">Proyectos</a> / <span>Plataforma de Juegos Web</span>
+            </div>
+            <div class="project-title-section">
+                <h1 class="project-title">Plataforma de Juegos Web</h1>
+                <p class="project-subtitle">Plataforma multijugador para juegos web con chat en tiempo real</p>
+                <div class="project-tech-stack">
+                    <span class="tech-tag">Phaser.js</span>
+                    <span class="tech-tag">WebSocket</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Socket.io</span>
+                    <span class="tech-tag">Node.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <!-- Project Description -->
+                <div class="project-description">
+                    <h2>Descripción del Proyecto</h2>
+                    <p>
+                        Desarrollé una plataforma completa de juegos web que permite a los usuarios jugar 
+                        múltiples juegos multijugador en tiempo real. La plataforma incluye sistema de 
+                        usuarios, chat en vivo, rankings y torneos automáticos.
+                    </p>
+                    
+                    <h3>Características Principales</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Múltiples juegos integrados (Poker, Ajedrez, Damas)</li>
+                        <li><i class="fas fa-check"></i> Sistema multijugador en tiempo real</li>
+                        <li><i class="fas fa-check"></i> Chat global y por sala de juego</li>
+                        <li><i class="fas fa-check"></i> Sistema de ranking y logros</li>
+                        <li><i class="fas fa-check"></i> Torneos automáticos programados</li>
+                        <li><i class="fas fa-check"></i> Perfil de usuario con estadísticas</li>
+                        <li><i class="fas fa-check"></i> Sistema de amigos y desafíos</li>
+                        <li><i class="fas fa-check"></i> Notificaciones push en tiempo real</li>
+                    </ul>
+
+                    <h3>Desafíos Técnicos</h3>
+                    <p>
+                        El mayor desafío fue sincronizar el estado del juego entre múltiples jugadores 
+                        en tiempo real. Implementé un sistema de sincronización basado en WebSockets 
+                        con Redis para mantener la consistencia del estado del juego.
+                    </p>
+
+                    <h3>Resultados</h3>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">Jugadores registrados</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50ms</span>
+                            <span class="stat-label">Latencia promedio</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">99.8%</span>
+                            <span class="stat-label">Uptime del servidor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Images -->
+                <div class="project-images">
+                    <h2>Capturas de Pantalla</h2>
+                    <div class="image-gallery">
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Lobby+Principal" alt="Lobby Principal" loading="lazy">
+                            <p class="image-caption">Lobby principal con lista de juegos disponibles</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Sala+de+Poker" alt="Sala de Poker" loading="lazy">
+                            <p class="image-caption">Sala de poker multijugador en tiempo real</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Chat+Global" alt="Chat Global" loading="lazy">
+                            <p class="image-caption">Sistema de chat global y por sala</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Rankings" alt="Rankings" loading="lazy">
+                            <p class="image-caption">Sistema de rankings y logros</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Perfil+Usuario" alt="Perfil de Usuario" loading="lazy">
+                            <p class="image-caption">Perfil de usuario con estadísticas detalladas</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Torneos" alt="Torneos" loading="lazy">
+                            <p class="image-caption">Sistema de torneos automáticos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Actions -->
+    <section class="project-actions">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-gamepad"></i>
+                    Jugar Ahora
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fab fa-github"></i>
+                    Ver Código en GitHub
+                </a>
+                <a href="index.html#projects" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver a Proyectos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Jhon Desarrollador. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/project.js"></script>
+</body>
+</html>

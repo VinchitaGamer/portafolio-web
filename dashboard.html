@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Usuario - Jhon Desarrollador</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2><i class="fas fa-user"></i> Usuario Panel</h2>
+            </div>
+            <div class="admin-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="#messages" class="nav-item" data-section="messages">
+                    <i class="fas fa-envelope"></i>
+                    Mis Mensajes
+                </a>
+                <a href="#profile" class="nav-item" data-section="profile">
+                    <i class="fas fa-user-circle"></i>
+                    Mi Perfil
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <h1 class="admin-title">Panel de Usuario</h1>
+                <div class="admin-user">
+                    <div class="user-info">
+                        <p class="user-name" id="user-name">Cargando...</p>
+                        <p class="user-role" id="user-role">Usuario</p>
+                    </div>
+                    <button class="logout-btn" onclick="auth.logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="admin-section active">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="card-title">Mensajes Enviados</h3>
+                        <div class="card-value" id="sent-messages">0</div>
+                        <p class="card-description">Mensajes que has enviado</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <h3 class="card-title">Miembro Desde</h3>
+                        <div class="card-value" id="member-since">Hoy</div>
+                        <p class="card-description">Fecha de registro</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="card-title">Visitas</h3>
+                        <div class="card-value" id="user-visits">12</div>
+                        <p class="card-description">Veces que has visitado</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="card-title">Estado</h3>
+                        <div class="card-value" id="user-status">Activo</div>
+                        <p class="card-description">Estado de tu cuenta</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Actividad Reciente</h3>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Acción</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-activity">
+                            <tr>
+                                <td>Hoy</td>
+                                <td>Login de usuario</td>
+                                <td><span class="status-success">Exitoso</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages-section" class="admin-section">
+                <div class="form-container">
+                    <h3 class="table-title">Enviar Mensaje</h3>
+                    <form id="user-message-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="message-name">Tu Nombre</label>
+                                <input type="text" id="message-name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-email">Tu Email</label>
+                                <input type="email" id="message-email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-subject">Asunto</label>
+                            <input type="text" id="message-subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-content">Mensaje</label>
+                            <textarea id="message-content" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Mis Mensajes Enviados</h3>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Asunto</th>
+                                <th>Estado</th>
+                                <th>Respuesta</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-messages-table">
+                            <tr>
+                                <td colspan="4">No has enviado mensajes aún</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="admin-section">
+                <div class="form-container">
+                    <h3 class="table-title">Mi Perfil</h3>
+                    <form id="user-profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile-name">Nombre Completo</label>
+                                <input type="text" id="profile-name" name="name" value="Usuario Demo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email">Email</label>
+                                <input type="email" id="profile-email" name="email" value="usuario@demo.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile-phone">Teléfono</label>
+                                <input type="tel" id="profile-phone" name="phone" placeholder="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-company">Empresa</label>
+                                <input type="text" id="profile-company" name="company" placeholder="Mi Empresa">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-bio">Biografía</label>
+                            <textarea id="profile-bio" name="bio" rows="4" placeholder="Cuéntanos sobre ti..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-interests">Intereses</label>
+                            <input type="text" id="profile-interests" name="interests" placeholder="Desarrollo web, React, Node.js">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Actualizar Perfil
+                        </button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Estadísticas de Usuario</h3>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Mensajes Enviados</h4>
+                                <p class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Tiempo en el Sitio</h4>
+                                <p class="stat-number">5 min</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Última Actividad</h4>
+                                <p class="stat-number">Hoy</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Nivel de Usuario</h4>
+                                <p class="stat-number">Nuevo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/user-panel.js"></script>
+</body>
+</html>
