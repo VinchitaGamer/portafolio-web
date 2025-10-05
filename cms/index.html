@@ -6,6 +6,100 @@
   <meta name="robots" content="noindex" />
 </head>
 <body>
+  <script>
+    // Previene auto-inicialización antes de inyectar la configuración inline
+    window.CMS_MANUAL_INIT = true;
+  </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!window.CMS) return;
+      CMS.init({
+        config: {
+          backend: { name: 'git-gateway', branch: 'main' },
+          media_folder: 'img/uploads',
+          public_folder: '/img/uploads',
+          collections: [
+            {
+              name: 'site',
+              label: 'Datos del Sitio',
+              format: 'json',
+              delete: false,
+              editor: { preview: false },
+              files: [
+                {
+                  file: 'content/site.json',
+                  label: 'Información principal',
+                  name: 'siteInfo',
+                  fields: [
+                    { label: 'Título', name: 'title', widget: 'string' },
+                    { label: 'Descripción', name: 'description', widget: 'text' },
+                    { label: 'Imagen Principal', name: 'image', widget: 'image', required: false }
+                  ]
+                }
+              ]
+            },
+            {
+              name: 'projects',
+              label: 'Proyectos',
+              folder: 'content/projects',
+              create: true,
+              slug: '{{slug}}',
+              extension: 'json',
+              format: 'json',
+              fields: [
+                { label: 'ID', name: 'id', widget: 'string' },
+                { label: 'Título', name: 'title', widget: 'string' },
+                { label: 'Subtítulo', name: 'subtitle', widget: 'string', required: false },
+                { label: 'Descripción', name: 'description', widget: 'text' },
+                { label: 'Tecnologías', name: 'tech', widget: 'string' },
+                { label: 'Categoría', name: 'category', widget: 'select', options: ['web','mobile','desktop','ai'], default: 'web' },
+                {
+                  label: 'Imágenes',
+                  name: 'images',
+                  widget: 'object',
+                  collapsed: true,
+                  fields: [
+                    { label: 'Hero', name: 'hero', widget: 'image', required: false },
+                    { label: 'Catalog', name: 'catalog', widget: 'image', required: false },
+                    { label: 'Cart', name: 'cart', widget: 'image', required: false },
+                    { label: 'Admin', name: 'admin', widget: 'image', required: false },
+                    { label: 'Analytics', name: 'analytics', widget: 'image', required: false }
+                  ]
+                }
+              ]
+            },
+            {
+              name: 'pages',
+              label: 'Páginas',
+              folder: 'content/pages',
+              create: true,
+              slug: '{{slug}}',
+              extension: 'md',
+              format: 'frontmatter',
+              fields: [
+                { label: 'Título', name: 'title', widget: 'string' },
+                { label: 'Imagen', name: 'image', widget: 'image', required: false },
+                { label: 'Contenido', name: 'body', widget: 'markdown' }
+              ]
+            }
+          ]
+        }
+      });
+    });
+  </script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', (user) => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/cms/';
+          });
+        }
+      });
+      window.netlifyIdentity.init();
+    }
+  </script>
 </body>
 </html>

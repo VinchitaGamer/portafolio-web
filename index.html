@@ -354,6 +354,7 @@
 
     <script src="js/script.js"></script>
     <script src="js/image-manager.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
     (async function () {
       try {
@@ -380,6 +381,50 @@
         // if (heroImg && data.image) heroImg.src = data.image;
       } catch (e) {
         console.warn('CMS content not loaded:', e);
+      }
+    })();
+    </script>
+    <script>
+    (async function renderAboutFromCMS() {
+      try {
+        const res = await fetch('content/pages/about.md', { cache: 'no-store' });
+        if (!res.ok) return;
+        const md = await res.text();
+        const aboutText = document.querySelector('.about .about-text');
+        if (aboutText && window.marked) {
+          aboutText.innerHTML = marked.parse(md);
+        }
+      } catch (e) {
+        console.warn('CMS about not loaded:', e);
+      }
+    })();
+
+    (async function renderProjectsFromCMS() {
+      try {
+        const grid = document.querySelector('.projects .projects-grid');
+        if (!grid) return;
+        const res = await fetch('content/projects/index.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const items = await res.json();
+        if (!Array.isArray(items) || !items.length) return;
+
+        grid.innerHTML = items.map(p => `
+          <div class="project-card">
+            <div class="project-image">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <div class="project-content">
+              <h3>${p.title || p.id}</h3>
+              <p>${p.subtitle || ''}</p>
+              <div class="project-tech">
+                ${(p.tech || '').split(',').slice(0,3).map(t => `<span class="tech-tag">${t.trim()}</span>`).join('')}
+              </div>
+              <a href="proyecto-${(p.id||'').toLowerCase()}.html" class="project-link">Ver Proyecto</a>
+            </div>
+          </div>
+        `).join('');
+      } catch (e) {
+        console.warn('CMS projects not loaded:', e);
       }
     })();
     </script>
