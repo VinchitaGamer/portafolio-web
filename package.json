@@ -1,0 +1,31 @@
+{
+  "name": "portafolio-web",
+  "version": "1.0.0",
+  "description": "Portafolio web profesional con panel de administración",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "live-server --port=8000",
+    "build": "echo 'No build process needed for static site'",
+    "deploy": "git add . && git commit -m 'Deploy update' && git push origin main"
+  },
+  "keywords": [
+    "portafolio",
+    "web",
+    "html",
+    "css",
+    "javascript",
+    "admin-panel",
+    "responsive"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TU-USUARIO/NOMBRE-REPOSITORIO.git"
+  },
+  "homepage": "https://TU-USUARIO.github.io/NOMBRE-REPOSITORIO",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
