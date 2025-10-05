@@ -1,0 +1,35 @@
+[
+  {
+    "id": "ecommerceeee",
+    "title": "Plataforma E-Commerceeeeee",
+    "subtitle": "Solución completa de comercio electrónico moderna y escalable",
+    "description": "Desarrollé una plataforma de e-commerce moderna para comprar y vender productos de manera segura y eficiente.",
+    "tech": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Express",
+      "Stripe"
+    ],
+    "category": "web",
+    "icon": "fas fa-shopping-cart",
+    "images": {
+      "hero": "",
+      "catalog": "",
+      "cart": "",
+      "admin": "",
+      "analytics": ""
+    }
+  },
+  {
+    "id": "masivos",
+    "title": "Automatización, envío de Masivos ",
+    "subtitle": "Automatización Whatsapp Web con Chrome Driver",
+    "description": "Aplicación de escritorio ",
+    "tech": [
+      "Python"
+    ],
+    "category": "web",
+    "icon": "fab fa-whatsapp"
+  }
+]
