@@ -2,4 +2,4 @@
 title: Acerca de
 image: ""
 ---
-Soy un desarrollador de software
+Soy un desarrollador de software jhonnnnnnn
