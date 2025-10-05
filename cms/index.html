@@ -22,6 +22,33 @@
           public_folder: '/img/uploads',
           collections: [
             {
+              name: 'projects_index',
+              label: 'Listado (Home) de Proyectos',
+              files: [
+                {
+                  file: 'content/projects/index.json',
+                  label: 'Proyectos en Home',
+                  name: 'projectsHome',
+                  fields: [
+                    {
+                      label: 'Proyectos',
+                      name: 'items',
+                      widget: 'list',
+                      field: {
+                        label: 'Proyecto',
+                        name: 'project',
+                        widget: 'relation',
+                        collection: 'projects',
+                        search_fields: ['title', 'id'],
+                        value_field: 'id',
+                        display_fields: ['title']
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               name: 'site',
               label: 'Datos del Sitio',
               format: 'json',
@@ -87,6 +114,68 @@
           ]
         }
       });
+    });
+  </script>
+  <script>
+    // Previews con estilos del sitio
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!window.CMS) return;
+      // Cargar tu CSS principal en el iframe de preview
+      CMS.registerPreviewStyle('/css/style.css');
+
+      // Template para Site (muestra título/descr principales)
+      const SitePreview = ({ entry }) => {
+        const data = entry.getIn(['data']).toJS();
+        const title = data.title || 'Título';
+        const description = data.description || '';
+        const image = data.image || '';
+        return h('section', { className: 'home' }, [
+          h('div', { className: 'home-container' }, [
+            h('div', { className: 'home-content' }, [
+              h('h1', { className: 'home-title' }, `Hola, soy ${title}`),
+              h('p', { className: 'home-description' }, description)
+            ]),
+            h('div', { className: 'home-image' }, [ image ? h('img', { src: image, alt: title }) : null ])
+          ])
+        ]);
+      };
+
+      // Template para una tarjeta de proyecto
+      const ProjectCard = (p) => (
+        h('div', { className: 'project-card' }, [
+          h('div', { className: 'project-image' }, [ h('i', { className: 'fas fa-laptop-code' }) ]),
+          h('div', { className: 'project-content' }, [
+            h('h3', null, p.title || p.id),
+            h('p', null, p.subtitle || ''),
+            h('div', { className: 'project-tech' }, ((p.tech||'').split(',').slice(0,3)).map(t => h('span', { className: 'tech-tag' }, t.trim())))
+          ])
+        ])
+      );
+
+      // Preview de colección Projects
+      const ProjectPreview = ({ entry }) => {
+        const p = entry.getIn(['data']).toJS();
+        return h('section', { className: 'projects' }, [
+          h('div', { className: 'container' }, [
+            h('h2', { className: 'section-title' }, 'Vista previa de Proyecto'),
+            h('div', { className: 'projects-grid' }, [ ProjectCard(p) ])
+          ])
+        ]);
+      };
+
+      // Preview de páginas Markdown
+      const PagePreview = ({ entry, widgetFor }) => (
+        h('section', { className: 'about' }, [
+          h('div', { className: 'container' }, [
+            h('h2', { className: 'section-title' }, entry.getIn(['data', 'title']) || 'Página'),
+            h('div', { className: 'about-content' }, [ h('div', { className: 'about-text' }, widgetFor('body')) ])
+          ])
+        ])
+      );
+
+      CMS.registerPreviewTemplate('site', SitePreview);
+      CMS.registerPreviewTemplate('projects', ProjectPreview);
+      CMS.registerPreviewTemplate('pages', PagePreview);
     });
   </script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

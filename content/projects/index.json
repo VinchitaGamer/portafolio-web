@@ -1,8 +1,5 @@
-[
-  {
-    "id": "ecommerce",
-    "title": "Plataforma E-Commerce",
-    "subtitle": "Solución completa de comercio electrónico moderna y escalable",
-    "tech": "React, Node.js, MongoDB, Express, Stripe"
-  }
-]
+{
+  "items": [
+    { "project": "ecommerce" }
+  ]
+}

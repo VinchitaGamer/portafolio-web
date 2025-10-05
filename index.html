@@ -405,10 +405,24 @@
         if (!grid) return;
         const res = await fetch('content/projects/index.json', { cache: 'no-store' });
         if (!res.ok) return;
-        const items = await res.json();
+        const indexData = await res.json();
+        const items = Array.isArray(indexData) ? indexData : (indexData.items || []);
         if (!Array.isArray(items) || !items.length) return;
 
-        grid.innerHTML = items.map(p => `
+        // Cargar cada proyecto por ID desde content/projects/<id>.json
+        const projects = await Promise.all(items.map(async (it) => {
+          const id = (it.project || it.id || '').toLowerCase();
+          if (!id) return null;
+          try {
+            const r = await fetch(`content/projects/${id}.json`, { cache: 'no-store' });
+            if (!r.ok) return null;
+            const data = await r.json();
+            // asegure id por si falta
+            return { id, ...data };
+          } catch { return null; }
+        }));
+
+        const cards = projects.filter(Boolean).map(p => `
           <div class="project-card">
             <div class="project-image">
               <i class="fas fa-laptop-code"></i>
@@ -417,12 +431,14 @@
               <h3>${p.title || p.id}</h3>
               <p>${p.subtitle || ''}</p>
               <div class="project-tech">
-                ${(p.tech || '').split(',').slice(0,3).map(t => `<span class="tech-tag">${t.trim()}</span>`).join('')}
+                ${(p.tech || '').split(',').slice(0,3).map(t => `<span class=\"tech-tag\">${t.trim()}</span>`).join('')}
               </div>
               <a href="proyecto-${(p.id||'').toLowerCase()}.html" class="project-link">Ver Proyecto</a>
             </div>
           </div>
         `).join('');
+
+        if (cards) grid.innerHTML = cards;
       } catch (e) {
         console.warn('CMS projects not loaded:', e);
       }
