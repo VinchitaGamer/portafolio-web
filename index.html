@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+      .projects-grid[data-loading="true"]::before {
+        content: 'Cargando proyectos...';
+        display: block;
+        text-align: center;
+        padding: 4rem 1rem;
+        font-size: 1.2rem;
+        color: #666;
+      }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -48,7 +69,7 @@
             <div class="home-image fade-in">
                 <div class="profile-card">
                     <div class="profile-image">
-                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                     </div>
                 </div>
             </div>
@@ -76,35 +97,35 @@
                     <h3>Habilidades Técnicas</h3>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <i class="fab fa-html5"></i>
+                            <i class="fab fa-html5" aria-hidden="true"></i>
                             <span>HTML5</span>
                         </div>
                         <div class="skill-item">
-                            <i class="fab fa-css3-alt"></i>
+                            <i class="fab fa-css3-alt" aria-hidden="true"></i>
                             <span>CSS3</span>
                         </div>
                         <div class="skill-item">
-                            <i class="fab fa-js-square"></i>
+                            <i class="fab fa-js-square" aria-hidden="true"></i>
                             <span>JavaScript</span>
                         </div>
                         <div class="skill-item">
-                            <i class="fab fa-react"></i>
+                            <i class="fab fa-react" aria-hidden="true"></i>
                             <span>React</span>
                         </div>
                         <div class="skill-item">
-                            <i class="fab fa-node-js"></i>
+                            <i class="fab fa-node-js" aria-hidden="true"></i>
                             <span>Node.js</span>
                         </div>
                         <div class="skill-item">
-                            <i class="fab fa-python"></i>
+                            <i class="fab fa-python" aria-hidden="true"></i>
                             <span>Python</span>
                         </div>
                         <div class="skill-item">
-                            <i class="fab fa-git-alt"></i>
+                            <i class="fab fa-git-alt" aria-hidden="true"></i>
                             <span>Git</span>
                         </div>
                         <div class="skill-item">
-                            <i class="fas fa-database"></i>
+                            <i class="fas fa-database" aria-hidden="true"></i>
                             <span>MongoDB</span>
                         </div>
                     </div>
@@ -117,102 +138,8 @@
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title">Mis Proyectos</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Plataforma E-Commerce</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                        </div>
-                        <a href="proyecto-ecommerce.html" class="project-link">Ver Proyecto</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Aplicación Bancaria Móvil</h3>
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">TypeScript</span>
-                        </div>
-                        <a href="proyecto-banking.html" class="project-link">Ver Proyecto</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Panel de Análisis</h3>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">D3.js</span>
-                            <span class="tech-tag">Express</span>
-                        </div>
-                        <a href="proyecto-analytics.html" class="project-link">Ver Proyecto</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-blog"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Sistema de Gestión de Contenidos</h3>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Next.js</span>
-                            <span class="tech-tag">Prisma</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                        </div>
-                        <a href="proyecto-cms.html" class="project-link">Ver Proyecto</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Plataforma de Juegos Web</h3>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Phaser.js</span>
-                            <span class="tech-tag">WebSocket</span>
-                            <span class="tech-tag">Redis</span>
-                        </div>
-                        <a href="proyecto-gaming.html" class="project-link">Ver Proyecto</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Solución de Almacenamiento en la Nube</h3>
-                        <p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Kubernetes</span>
-                        </div>
-                        <a href="proyecto-cloud.html" class="project-link">Ver Proyecto</a>
-                    </div>
-                </div>
+            <div class="projects-grid" data-loading="true">
+                                <!-- Project cards will be injected here by JavaScript -->
             </div>
         </div>
     </section>
@@ -224,7 +151,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-code"></i>
+                        <i class="fas fa-code" aria-hidden="true"></i>
                     </div>
                     <h3>Desarrollo Web</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -237,7 +164,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                        <i class="fas fa-mobile-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Desarrollo Móvil</h3>
                     <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -250,7 +177,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
+                        <i class="fas fa-cogs" aria-hidden="true"></i>
                     </div>
                     <h3>Desarrollo Backend</h3>
                     <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
@@ -263,7 +190,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-tools"></i>
+                        <i class="fas fa-tools" aria-hidden="true"></i>
                     </div>
                     <h3>Mantenimiento y Soporte</h3>
                     <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -288,31 +215,31 @@
                     
                     <div class="contact-details">
                         <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
                             <span>juan.desarrollador@email.com</span>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-phone"></i>
+                            <i class="fas fa-phone" aria-hidden="true"></i>
                             <span>+1 (555) 123-4567</span>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                             <span>San Francisco, CA</span>
                         </div>
                     </div>
 
                     <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-linkedin"></i>
+                        <a href="#!" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-github"></i>
+                        <a href="#!" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
+                        <a href="#!" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-dribbble"></i>
+                        <a href="#!" class="social-link" aria-label="Dribbble">
+                            <i class="fab fa-dribbble" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -320,12 +247,15 @@
                 <div class="contact-form">
                     <form id="contact-form">
                         <div class="form-group">
+                            <label for="name" class="sr-only">Tu Nombre</label>
                             <input type="text" id="name" name="name" placeholder="Tu Nombre" required>
                         </div>
                         <div class="form-group">
+                            <label for="email" class="sr-only">Tu Email</label>
                             <input type="email" id="email" name="email" placeholder="Tu Email" required>
                         </div>
                         <div class="form-group">
+                            <label for="message" class="sr-only">Tu Mensaje</label>
                             <textarea id="message" name="message" placeholder="Tu Mensaje" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
@@ -341,11 +271,11 @@
             <p>&copy; 2024 Jhon Desarrollador. Todos los derechos reservados.</p>
             <div class="admin-access">
                 <a href="login.html" class="admin-link">
-                    <i class="fas fa-cog"></i>
+                    <i class="fas fa-cog" aria-hidden="true"></i>
                     Acceso Admin
                 </a>
                 <a href="cms/" class="admin-link" style="margin-left:12px">
-                    <i class="fas fa-pen"></i>
+                    <i class="fas fa-pen" aria-hidden="true"></i>
                     Editar Contenido (CMS)
                 </a>
             </div>
@@ -399,48 +329,55 @@
       }
     })();
 
-    (async function renderProjectsFromCMS() {
+        (async function renderProjectsFromCMS() {
+      const grid = document.querySelector('.projects .projects-grid');
+      if (!grid) return;
+
       try {
-        const grid = document.querySelector('.projects .projects-grid');
-        if (!grid) return;
-        const res = await fetch('content/projects/index.json', { cache: 'no-store' });
-        if (!res.ok) return;
-        const indexData = await res.json();
-        const items = Array.isArray(indexData) ? indexData : (indexData.items || []);
-        if (!Array.isArray(items) || !items.length) return;
+        // Fetch all projects from a single, consolidated JSON file.
+        const res = await fetch('content/projects.json', { cache: 'no-store' });
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const projects = await res.json();
 
-        // Cargar cada proyecto por ID desde content/projects/<id>.json
-        const projects = await Promise.all(items.map(async (it) => {
-          const id = (it.project || it.id || '').toLowerCase();
-          if (!id) return null;
-          try {
-            const r = await fetch(`content/projects/${id}.json`, { cache: 'no-store' });
-            if (!r.ok) return null;
-            const data = await r.json();
-            // asegure id por si falta
-            return { id, ...data };
-          } catch { return null; }
-        }));
+        if (!Array.isArray(projects) || !projects.length) {
+            grid.innerHTML = '<p>No hay proyectos para mostrar en este momento.</p>';
+            grid.removeAttribute('data-loading');
+            return;
+        }
 
-        const cards = projects.filter(Boolean).map(p => `
-          <div class="project-card">
-            <div class="project-image">
-              <i class="fas fa-laptop-code"></i>
-            </div>
-            <div class="project-content">
-              <h3>${p.title || p.id}</h3>
-              <p>${p.subtitle || ''}</p>
-              <div class="project-tech">
-                ${(p.tech || '').split(',').slice(0,3).map(t => `<span class=\"tech-tag\">${t.trim()}</span>`).join('')}
+        const cards = projects.map(p => {
+          const projectId = (p.id || p.title || 'default').toLowerCase().replace(/\s+/g, '-');
+          const projectIcon = p.icon || 'fas fa-laptop-code';
+          const projectTech = (p.tech || []).slice(0, 3).map(t => `<span class="tech-tag">${t.trim()}</span>`).join('');
+
+          return `
+            <div class="project-card">
+              <div class="project-image">
+                <i class="${projectIcon}" aria-hidden="true"></i>
               </div>
-              <a href="proyecto-${(p.id||'').toLowerCase()}.html" class="project-link">Ver Proyecto</a>
+              <div class="project-content">
+                <h3>${p.title || 'Proyecto sin título'}</h3>
+                <p>${p.subtitle || ''}</p>
+                <div class="project-tech">
+                  ${projectTech}
+                </div>
+                <a href="proyecto-${projectId}.html" class="project-link">Ver Proyecto</a>
+              </div>
             </div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
 
-        if (cards) grid.innerHTML = cards;
+        if (cards) {
+            grid.innerHTML = cards;
+        }
+        
       } catch (e) {
         console.warn('CMS projects not loaded:', e);
+        grid.innerHTML = '<p>Error al cargar los proyectos. Intente de nuevo más tarde.</p>';
+      } finally {
+        grid.removeAttribute('data-loading');
       }
     })();
     </script>

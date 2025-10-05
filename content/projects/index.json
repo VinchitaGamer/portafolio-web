@@ -1,5 +1,7 @@
 {
   "items": [
-    { "project": "ecommerce" }
+    { "project": "ecommerce" },
+    { "project": "masivos" },
+    { "project": "prueba" }
   ]
 }
