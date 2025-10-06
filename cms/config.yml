@@ -21,34 +21,35 @@ collections:
           - { label: "Descripción", name: "description", widget: "text" }
           - { label: "Imagen Principal", name: "image", widget: "image", required: false }
 
-  - name: "projects"
+  - name: "projects_file"
     label: "Proyectos"
-    label_singular: "Proyecto"
-    file: "content/projects.json"
-    extension: "json"
-    format: "json"
-    create: true
-    slug: "{{id}}"
-    identifier_field: "id"
-    fields:
-      - { label: "ID", name: "id", widget: "string", hint: "Un identificador único para el proyecto (ej: mi-nuevo-proyecto)" }
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Subtítulo", name: "subtitle", widget: "string", required: false }
-      - { label: "Descripción", name: "description", widget: "text" }
-      - { label: "Tecnologías", name: "tech", widget: "list", field: { label: "Tecnología", name: "tech_item", widget: "string" } }
-      - { label: "Categoría", name: "category", widget: "select", options: ["web","mobile","desktop","ai"], default: "web" }
-      - { label: "Icono de FontAwesome", name: "icon", widget: "string", required: false, hint: "Ej: fas fa-shopping-cart" }
-      - label: "Imágenes"
-        name: "images"
-        widget: "object"
-        collapsed: true
-        required: false
+    files:
+      - label: "Todos los Proyectos"
+        name: "projects"
+        file: "content/projects.json"
         fields:
-          - { label: "Hero", name: "hero", widget: "image", required: false }
-          - { label: "Catalog", name: "catalog", widget: "image", required: false }
-          - { label: "Cart", name: "cart", widget: "image", required: false }
-          - { label: "Admin", name: "admin", widget: "image", required: false }
-          - { label: "Analytics", name: "analytics", widget: "image", required: false }
+          - label: "Lista de Proyectos"
+            name: "projects"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Un identificador único para el proyecto (ej: mi-nuevo-proyecto)" }
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Subtítulo", name: "subtitle", widget: "string", required: false }
+              - { label: "Descripción", name: "description", widget: "text" }
+              - { label: "Tecnologías", name: "tech", widget: "list", field: { label: "Tecnología", name: "tech_item", widget: "string" } }
+              - { label: "Categoría", name: "category", widget: "select", options: ["web","mobile","desktop","ai"], default: "web" }
+              - { label: "Icono de FontAwesome", name: "icon", widget: "string", required: false, hint: "Ej: fas fa-shopping-cart" }
+              - label: "Imágenes"
+                name: "images"
+                widget: "object"
+                collapsed: true
+                required: false
+                fields:
+                  - { label: "Hero", name: "hero", widget: "image", required: false }
+                  - { label: "Catalog", name: "catalog", widget: "image", required: false }
+                  - { label: "Cart", name: "cart", widget: "image", required: false }
+                  - { label: "Admin", name: "admin", widget: "image", required: false }
+                  - { label: "Analytics", name: "analytics", widget: "image", required: false }
 
   - name: pages
     label: Páginas

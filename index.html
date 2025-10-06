@@ -339,7 +339,8 @@
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
-        const projects = await res.json();
+        const data = await res.json();
+        const projects = data.projects;
 
         if (!Array.isArray(projects) || !projects.length) {
             grid.innerHTML = '<p>No hay proyectos para mostrar en este momento.</p>';
