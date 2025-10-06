@@ -8,14 +8,7 @@
       "icon": "fas fa-shopping-cart",
       "link": "proyecto-ecommerce.html"
     },
-    {
-      "id": "banking",
-      "title": "Aplicación Bancaria Móvil",
-      "subtitle": "Gestión de finanzas personales desde tu móvil.",
-      "tech": ["React Native", "Firebase", "TypeScript"],
-      "icon": "fas fa-mobile-alt",
-      "link": "proyecto-banking.html"
-    },
+    
     {
       "id": "cloud",
       "title": "Solución de Almacenamiento",
@@ -44,7 +37,7 @@
       "id": "masivos",
       "title": "Envío Masivo de Mensajes",
       "subtitle": "Automatización de envíos por WhatsApp.",
-      "tech": ["Python", "Selenium"],
+      "tech": ["Python", "Selenium", "HTML"],
       "icon": "fab fa-whatsapp",
       "link": "masivos.html"
     }
