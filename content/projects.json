@@ -23,7 +23,7 @@
       }
     },
     {
-      "id": "masivos",
+      "projectId": "masivos",
       "title": "Automatización, envío de Masivos ",
       "subtitle": "Automatización Whatsapp Web con Chrome Driver",
       "description": "Aplicación de escritorio ",
