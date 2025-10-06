@@ -1,48 +1,52 @@
 {
   "projects": [
     {
-      "id": "ecommerceeee",
-      "title": "Plataforma E-Commerceeeeee",
-      "subtitle": "Solución completa de comercio electrónico moderna y escalable",
-      "description": "Desarrollé una plataforma de e-commerce moderna para comprar y vender productos de manera segura y eficiente.",
-      "tech": [
-        "React",
-        "Node.js",
-        "MongoDB",
-        "Express",
-        "Stripe"
-      ],
-      "category": "web",
+      "id": "ecommerce",
+      "title": "Plataforma E-Commerce",
+      "subtitle": "Solución de comercio electrónico moderna y escalable.",
+      "tech": ["React", "Node.js", "MongoDB"],
       "icon": "fas fa-shopping-cart",
-      "images": {
-        "hero": "",
-        "catalog": "",
-        "cart": "",
-        "admin": "",
-        "analytics": ""
-      }
+      "link": "proyecto-ecommerce.html"
     },
     {
-      "projectId": "masivos",
-      "title": "Automatización, envío de Masivos ",
-      "subtitle": "Automatización Whatsapp Web con Chrome Driver",
-      "description": "Aplicación de escritorio ",
-      "tech": [
-        "Python"
-      ],
-      "category": "web",
-      "icon": "fab fa-whatsapp"
+      "id": "banking",
+      "title": "Aplicación Bancaria Móvil",
+      "subtitle": "Gestión de finanzas personales desde tu móvil.",
+      "tech": ["React Native", "Firebase", "TypeScript"],
+      "icon": "fas fa-mobile-alt",
+      "link": "proyecto-banking.html"
     },
     {
-      "id": "prueba",
-      "title": "prueba",
-      "subtitle": "prueba",
-      "description": "prueba",
-      "tech": [
-        "Python"
-      ],
-      "category": "web",
-      "icon": "fab fa-whatsapp"
+      "id": "cloud",
+      "title": "Solución de Almacenamiento",
+      "subtitle": "Plataforma de almacenamiento en la nube segura y distribuida.",
+      "tech": ["AWS", "Docker", "Kubernetes"],
+      "icon": "fas fa-cloud",
+      "link": "proyecto-cloud.html"
+    },
+    {
+      "id": "cms",
+      "title": "Sistema de Gestión de Contenidos",
+      "subtitle": "Crea y gestiona contenido digital de forma sencilla.",
+      "tech": ["Next.js", "Prisma", "PostgreSQL"],
+      "icon": "fas fa-blog",
+      "link": "proyecto-cms.html"
+    },
+    {
+      "id": "gaming",
+      "title": "Plataforma de Juegos Web",
+      "subtitle": "Portal de juegos en línea con tecnología web.",
+      "tech": ["Phaser.js", "WebSocket", "Redis"],
+      "icon": "fas fa-gamepad",
+      "link": "proyecto-gaming.html"
+    },
+    {
+      "id": "masivos",
+      "title": "Envío Masivo de Mensajes",
+      "subtitle": "Automatización de envíos por WhatsApp.",
+      "tech": ["Python", "Selenium"],
+      "icon": "fab fa-whatsapp",
+      "link": "masivos.html"
     }
   ]
 }
