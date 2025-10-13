@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Personal - Dev Sour</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project-v2.css">
+    <link rel="stylesheet" href="css/custom-project.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Dev Sour</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="index.html#about" class="nav-link">Acerca de</a>
+                <a href="index.html#projects" class="nav-link">Proyectos</a>
+                <a href="index.html#services" class="nav-link">Servicios</a>
+                <a href="index.html#contact" class="nav-link">Contacto</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <div class="project-breadcrumb">
+                <a href="index.html">Inicio</a> / <a href="index.html#projects">Proyectos</a> / <span>Registro de Personal</span>
+            </div>
+            <div class="project-title-section">
+                <h1 class="project-title">Aplicación de Escritorio: Registro de Personal</h1>
+                <p class="project-subtitle">Sistema de control de asistencia de personal mediante códigos QR dinámicos.</p>
+                <div class="project-tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">Openpyxl</span>
+                    <span class="tech-tag">Tkinter</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <!-- Project Description -->
+                <div class="project-description">
+                    <h2>Descripción del Proyecto</h2>
+                    <p>
+                        He desarrollado una aplicación de escritorio con Python y Flask para la gestión de asistencia de empleados. La aplicación muestra en pantalla un código QR que se actualiza cada 10 segundos. Los empleados pueden escanear este código para registrar su hora de entrada y salida de forma segura y eficiente.
+                    </p>
+                    
+                    <h3>Características Principales</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Generación de códigos QR dinámicos cada 10 segundos.</li>
+                        <li><i class="fas fa-check"></i> Registro de asistencia al escanear el QR desde un dispositivo móvil.</li>
+                        <li><i class="fas fa-check"></i> Almacenamiento de datos en una base de datos SQLite y exportación a Excel.</li>
+                        <li><i class="fas fa-check"></i> Interfaz gráfica con diseños personalizados para diferentes estados:</li>
+                        <li><i class="fas fa-check"></i> Registro Exitoso: Confirmación visual para el empleado.</li>
+                        <li><i class="fas fa-check"></i> Atraso: Notificación si el registro es posterior a la hora de entrada.</li>
+                        <li><i class="fas fa-check"></i> Token Invalidado: Mensaje de error si el QR ha expirado.</li>
+                    </ul>
+
+                    <h3>Desafíos Técnicos</h3>
+                    <p>
+                        El principal reto fue sincronizar la generación del QR en la aplicación de escritorio con la validación en el servidor Flask en un intervalo de 10 segundos para garantizar la seguridad y evitar registros fraudulentos. La integración de la base de datos SQLite con la exportación a Excel también requirió un manejo cuidadoso de los datos para mantener la integridad.
+                    </p>
+
+                    <h3>Resultados</h3>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">&lt;1s</span>
+                            <span class="stat-label">Tiempo de registro</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Precisión de datos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">-80%</span>
+                            <span class="stat-label">Reducción de errores</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Images -->
+                <div class="project-images">
+                    <h2>Capturas de Pantalla</h2>
+                    <div class="image-gallery-custom">
+                        <div class="image-item horizontal">
+                            <img src="https://i.postimg.cc/FR9RgsgG/Captura-de-pantalla-2025-10-13-154859.png" alt="Captura de pantalla del programa 1" loading="lazy">
+                            <p class="image-caption">Vista principal de la aplicación de escritorio.</p>
+                        </div>
+                        <div class="image-item horizontal">
+                            <img src="https://i.postimg.cc/tTXTtCN7/Captura-de-pantalla-2025-10-13-162740.png" alt="Captura de pantalla del programa 2" loading="lazy">
+                            <p class="image-caption">Reporte de asistencia generado en Excel.</p>
+                        </div>
+                        <div class="image-item vertical">
+                            <img src="https://i.postimg.cc/QtXtkxJN/Imagen-de-Whats-App-2025-10-13-a-las-16-26-00-36a34ef8.jpg" alt="Captura de pantalla del teléfono 1" loading="lazy">
+                            <p class="image-caption">Escaneo de QR desde el móvil.</p>
+                        </div>
+                        <div class="image-item vertical">
+                            <img src="https://i.postimg.cc/cHsHM4BL/Imagen-de-Whats-App-2025-10-13-a-las-16-26-00-62ae5ef8.jpg" alt="Captura de pantalla del teléfono 2" loading="lazy">
+                            <p class="image-caption">Confirmación de registro exitoso.</p>
+                        </div>
+                        <div class="image-item vertical">
+                            <img src="https://i.postimg.cc/cHsHM4BL/Imagen-de-Whats-App-2025-10-13-a-las-16-26-00-62ae5ef8.jpg" alt="Captura de pantalla del teléfono 3" loading="lazy">
+                            <p class="image-caption">Mensaje de token invalidado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Actions -->
+    <section class="project-actions">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="index.html#projects" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver a Proyectos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Dev Sour. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/project.js"></script>
+    <script src="js/image-manager.js"></script>
+</body>
+</html>

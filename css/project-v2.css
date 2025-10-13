@@ -1,23 +1,6 @@
-/* Project Page Styles - Optimized */
+/* Project Page Styles - V2 */
 
-/* Admin Demo Button */
-.admin-demo-btn {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-/* Project Header */
-.project-header {
-    background: linear-gradient(135deg, #4f63a3 0%, #2c3e50 100%);
-    color: white;
-    padding: 8rem 0 4rem;
-    margin-top: 80px;
-    overflow: hidden; /* To contain animations */
-}
-
+/* Keyframe Animations */
 @keyframes slideInDown {
     from { transform: translateY(-30px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
@@ -28,8 +11,86 @@
     to { transform: translateY(0); opacity: 1; }
 }
 
+/* Admin Demo Button */
+.admin-demo-btn {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admin-demo-btn:hover {
+    text-decoration: none;
+}
+
+.admin-demo-btn {
+    display: none !important;
+}
+
+/* Project Header */
+.project-header {
+    background: linear-gradient(135deg, #435485 0%, #2c3e50 100%);
+    color: white;
+    padding: 8rem 0 4rem;
+    margin-top: 80px;
+    overflow: hidden; /* Contain animations */
+}
+
 .project-breadcrumb {
     margin-bottom: 2rem;
+    font-size: 0.9rem;
+    opacity: 0; /* Initial state for animation */
+    animation: slideInDown 0.6s ease-out 0.2s forwards;
+}
+
+.project-breadcrumb a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.project-breadcrumb a:hover {
+    opacity: 0.8;
+}
+
+.project-title-section {
+    text-align: center;
+}
+
+.project-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+    opacity: 0; /* Initial state for animation */
+    animation: slideInDown 0.6s ease-out 0.4s forwards;
+}
+
+.project-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 0.6s ease-out 0.6s forwards;
+}
+
+.project-tech-stack {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 0.6s ease-out 0.8s forwards;
+}
+
+.project-tech-stack .tech-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     padding: 0.5rem 1rem;
     border-radius: 25px;
     font-size: 0.9rem;
@@ -40,7 +101,7 @@
 }
 
 .project-tech-stack .tech-tag:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
 }
 
@@ -291,13 +352,6 @@
 
 .project-images {
     animation-delay: 0.1s;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* Lightbox styles */

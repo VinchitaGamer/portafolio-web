@@ -6,16 +6,17 @@
       "subtitle": "Solución de comercio electrónico moderna y escalable.",
       "tech": ["React", "Node.js", "MongoDB"],
       "icon": "fas fa-shopping-cart",
-      "link": "proyecto-ecommerce.html"
+      "link": "proyecto-ecommerce.html",
+      "visible": true
     },
-    
     {
-      "id": "cloud",
-      "title": "Solución de Almacenamiento",
-      "subtitle": "Plataforma de almacenamiento en la nube segura y distribuida.",
-      "tech": ["AWS", "Docker", "Kubernetes"],
-      "icon": "fas fa-cloud",
-      "link": "proyecto-cloud.html"
+      "id": "registro-personal",
+      "title": "Registro de Personal",
+      "subtitle": "Sistema de control de asistencia con códigos QR dinámicos.",
+      "tech": ["Python", "Flask", "SQLite"],
+      "icon": "fas fa-qrcode",
+      "link": "proyecto-registro.html",
+      "visible": true
     },
     {
       "id": "cms",
@@ -23,7 +24,8 @@
       "subtitle": "Crea y gestiona contenido digital de forma sencilla.",
       "tech": ["Next.js", "Prisma", "PostgreSQL"],
       "icon": "fas fa-blog",
-      "link": "proyecto-cms.html"
+      "link": "proyecto-cms.html",
+      "visible": false
     },
     {
       "id": "gaming",
@@ -31,7 +33,8 @@
       "subtitle": "Portal de juegos en línea con tecnología web.",
       "tech": ["Phaser.js", "WebSocket", "Redis"],
       "icon": "fas fa-gamepad",
-      "link": "proyecto-gaming.html"
+      "link": "proyecto-gaming.html",
+      "visible": false
     },
     {
       "id": "masivos",
@@ -39,7 +42,8 @@
       "subtitle": "Automatización de envíos por WhatsApp.",
       "tech": ["Python", "Selenium", "HTML"],
       "icon": "fab fa-whatsapp",
-      "link": "masivos.html"
+      "link": "masivos.html",
+      "visible": true
     }
   ]
 }
