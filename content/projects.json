@@ -1,48 +1,81 @@
 {
   "projects": [
     {
+      "id": "chatbot-ventas",
+      "title": "ChatBot de Ventas para WhatsApp",
+      "subtitle": "Asistente virtual que atiende clientes 24/7, responde preguntas, muestra catálogo y cierra pedidos automáticamente por WhatsApp.",
+      "tech": [
+        "Node.js",
+        "WhatsApp Web.js",
+        "OpenAI"
+      ],
+      "icon": "fab fa-whatsapp",
+      "link": "proyecto-chatbot-ventas.html",
+      "visible": true
+    },
+    {
+      "id": "chatbot-agendas",
+      "title": "ChatBot de Agendamiento",
+      "subtitle": "Bot inteligente que agenda citas con clientes via WhatsApp, sincroniza con Google Calendar y envía recordatorios automáticos.",
+      "tech": [
+        "Node.js",
+        "Google Calendar API",
+        "Gemini AI"
+      ],
+      "icon": "fas fa-calendar-check",
+      "link": "proyecto-chatbot-agendas.html",
+      "visible": true
+    },
+    {
+      "id": "inventario",
+      "title": "Sistema de Gestión de Inventario",
+      "subtitle": "Software empresarial para control de stock, alertas de reabastecimiento, reportes en tiempo real y gestión de proveedores.",
+      "tech": [
+        "React",
+        "Node.js",
+        "PostgreSQL"
+      ],
+      "icon": "fas fa-boxes",
+      "link": "proyecto-inventario.html",
+      "visible": true
+    },
+    {
       "id": "ecommerce",
       "title": "Plataforma E-Commerce",
-      "subtitle": "Solución de comercio electrónico moderna y escalable.",
-      "tech": ["React", "Node.js", "MongoDB"],
+      "subtitle": "Solución de comercio electrónico moderna con catálogo, carrito de compras, pagos integrados y panel de administración.",
+      "tech": [
+        "React",
+        "Node.js",
+        "MongoDB"
+      ],
       "icon": "fas fa-shopping-cart",
       "link": "proyecto-ecommerce.html",
       "visible": true
     },
     {
       "id": "registro-personal",
-      "title": "Registro de Personal",
-      "subtitle": "Sistema de control de asistencia con códigos QR dinámicos.",
-      "tech": ["Python", "Flask", "SQLite"],
+      "title": "Sistema de Control de Asistencia",
+      "subtitle": "Control de asistencia corporativo con QR dinámico, reportes de horas trabajadas y exportación a Excel.",
+      "tech": [
+        "Python",
+        "Flask",
+        "SQLite"
+      ],
       "icon": "fas fa-qrcode",
       "link": "proyecto-registro.html",
       "visible": true
     },
     {
-      "id": "cms",
-      "title": "Sistema de Gestión de Contenidos",
-      "subtitle": "Crea y gestiona contenido digital de forma sencilla.",
-      "tech": ["Next.js", "Prisma", "PostgreSQL"],
-      "icon": "fas fa-blog",
-      "link": "proyecto-cms.html",
-      "visible": false
-    },
-    {
-      "id": "gaming",
-      "title": "Plataforma de Juegos Web",
-      "subtitle": "Portal de juegos en línea con tecnología web.",
-      "tech": ["Phaser.js", "WebSocket", "Redis"],
-      "icon": "fas fa-gamepad",
-      "link": "proyecto-gaming.html",
-      "visible": false
-    },
-    {
-      "id": "masivos",
-      "title": "Envío Masivo de Mensajes",
-      "subtitle": "Automatización de envíos por WhatsApp.",
-      "tech": ["Python", "Selenium", "HTML"],
-      "icon": "fab fa-whatsapp",
-      "link": "masivos.html",
+      "id": "automatizacion-n8n",
+      "title": "Automatización de Procesos con n8n",
+      "subtitle": "Flujos de trabajo automatizados que conectan CRM, WhatsApp, email y hojas de cálculo para eliminar tareas repetitivas.",
+      "tech": [
+        "n8n",
+        "REST APIs",
+        "Google Sheets"
+      ],
+      "icon": "fas fa-project-diagram",
+      "link": "proyecto-automatizacion.html",
       "visible": true
     }
   ]

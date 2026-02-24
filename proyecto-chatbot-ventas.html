@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot de Ventas para WhatsApp - Dev Sour</title>
+    <meta name="description"
+        content="Asistente virtual de ventas 24/7 para WhatsApp con IA integrada. Desarrollado por Dev Sour.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project-v2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="index.html">Dev Sour</a></div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="index.html#about" class="nav-link">Acerca de</a>
+                <a href="index.html#projects" class="nav-link">Proyectos</a>
+                <a href="index.html#services" class="nav-link">Servicios</a>
+                <a href="index.html#contact" class="nav-link">Contacto</a>
+            </div>
+            <button class="dark-toggle" id="dark-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon" id="dark-icon"></i>
+            </button>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="project-header" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);">
+        <div class="container">
+            <div class="project-breadcrumb" style="color:rgba(255,255,255,0.8);">
+                <a href="index.html" style="color:rgba(255,255,255,0.8)">Inicio</a> /
+                <a href="index.html#projects" style="color:rgba(255,255,255,0.8)">Proyectos</a> /
+                <span style="color:white">ChatBot de Ventas WhatsApp</span>
+            </div>
+            <div class="project-title-section">
+                <div style="font-size:4rem; margin-bottom:1rem;"><i class="fab fa-whatsapp" style="color:white"></i>
+                </div>
+                <h1 class="project-title" style="color:white">ChatBot de Ventas para WhatsApp</h1>
+                <p class="project-subtitle" style="color:rgba(255,255,255,0.85)">
+                    Asistente inteligente que atiende clientes, muestra catálogo y cierra pedidos 24/7 sin intervención
+                    humana.
+                </p>
+                <div class="project-tech-stack">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">WhatsApp Web.js</span>
+                    <span class="tech-tag">OpenAI GPT</span>
+                    <span class="tech-tag">MongoDB</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <div class="project-description">
+                    <h2>Descripción del Proyecto</h2>
+                    <p>
+                        Desarrollé un asistente virtual de ventas completamente automatizado para WhatsApp, conectado a
+                        un catálogo de productos dinámico y con inteligencia artificial para entender las consultas de
+                        los clientes en lenguaje natural.
+                    </p>
+                    <p>
+                        El bot puede mostrar productos, responder preguntas sobre disponibilidad, capturar pedidos,
+                        calcular totales y notificar al vendedor — todo en tiempo real sin que el dueño del negocio
+                        tenga que estar presente.
+                    </p>
+
+                    <h3>Características Principales</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Responde consultas de clientes 24 horas, 7 días a la semana con
+                            IA.</li>
+                        <li><i class="fas fa-check"></i> Muestra catálogo de productos con precios y disponibilidad en
+                            tiempo real.</li>
+                        <li><i class="fas fa-check"></i> Registra y gestiona pedidos directamente desde WhatsApp.</li>
+                        <li><i class="fas fa-check"></i> Notificaciones instantáneas al vendedor con cada nuevo pedido.
+                        </li>
+                        <li><i class="fas fa-check"></i> Panel web para ver historial de conversaciones y pedidos.</li>
+                        <li><i class="fas fa-check"></i> Integración con Google Sheets para exportar pedidos
+                            automáticamente.</li>
+                        <li><i class="fas fa-check"></i> Mensajes personalizados por etapa del proceso de venta.</li>
+                    </ul>
+
+                    <h3>Tecnología e IA Aplicada</h3>
+                    <p>
+                        El sistema combina <strong>WhatsApp Web.js</strong> como capa de mensajería con la API de
+                        <strong>OpenAI</strong> para interpretar intenciones del usuario. El catálogo se almacena en
+                        <strong>MongoDB</strong> y se actualiza en tiempo real desde un panel administrativo web.
+                    </p>
+
+                    <h3>Resultados</h3>
+                    <p>
+                        Los negocios que implementan este bot reportan una reducción del 70% en el tiempo dedicado a
+                        atención al cliente, con un aumento del 40% en la tasa de cierre de pedidos gracias a la
+                        respuesta inmediata y la disponibilidad constante.
+                    </p>
+                </div>
+
+                <!-- Feature Icons Panel -->
+                <div class="project-images">
+                    <h2>¿Cómo Funciona?</h2>
+                    <div style="display:grid; gap:1.2rem; margin-top:1rem;">
+                        <div
+                            style="padding:1.5rem; background:#f8f9fa; border-radius:14px; border-left:4px solid #25D366; display:flex; gap:1rem; align-items:flex-start;">
+                            <i class="fas fa-comment-dots"
+                                style="color:#25D366; font-size:1.8rem; flex-shrink:0; margin-top:2px;"></i>
+                            <div>
+                                <strong>1. Cliente escribe por WhatsApp</strong>
+                                <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#666;">El cliente pregunta por
+                                    productos, precios o disponibilidad en lenguaje natural.</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:1.5rem; background:#f8f9fa; border-radius:14px; border-left:4px solid #667eea; display:flex; gap:1rem; align-items:flex-start;">
+                            <i class="fas fa-brain"
+                                style="color:#667eea; font-size:1.8rem; flex-shrink:0; margin-top:2px;"></i>
+                            <div>
+                                <strong>2. IA procesa la consulta</strong>
+                                <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#666;">GPT interpreta la intención
+                                    y busca en el catálogo el producto adecuado.</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:1.5rem; background:#f8f9fa; border-radius:14px; border-left:4px solid #f093fb; display:flex; gap:1rem; align-items:flex-start;">
+                            <i class="fas fa-shopping-bag"
+                                style="color:#f093fb; font-size:1.8rem; flex-shrink:0; margin-top:2px;"></i>
+                            <div>
+                                <strong>3. Pedido capturado</strong>
+                                <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#666;">El bot registra el pedido y
+                                    notifica al vendedor con todos los detalles.</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:1.5rem; background:#f8f9fa; border-radius:14px; border-left:4px solid #43e97b; display:flex; gap:1rem; align-items:flex-start;">
+                            <i class="fas fa-chart-line"
+                                style="color:#43e97b; font-size:1.8rem; flex-shrink:0; margin-top:2px;"></i>
+                            <div>
+                                <strong>4. Panel de control</strong>
+                                <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#666;">Gestiona pedidos, historial
+                                    y estadísticas desde un panel web dedicado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Actions -->
+    <section class="project-actions">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="index.html#contact" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Solicitar este Proyecto
+                </a>
+                <a href="index.html#projects" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Volver a Proyectos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="footer-year"></span> Dev Sour. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/project.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot de Agendamiento - Dev Sour</title>
+    <meta name="description"
+        content="Bot de WhatsApp para agendamiento de citas con Google Calendar. Desarrollado por Dev Sour.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project-v2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="index.html">Dev Sour</a></div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="index.html#about" class="nav-link">Acerca de</a>
+                <a href="index.html#projects" class="nav-link">Proyectos</a>
+                <a href="index.html#services" class="nav-link">Servicios</a>
+                <a href="index.html#contact" class="nav-link">Contacto</a>
+            </div>
+            <button class="dark-toggle" id="dark-toggle" aria-label="Cambiar tema">
+                <i class="fas fa-moon" id="dark-icon"></i>
+            </button>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="project-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="project-breadcrumb" style="color:rgba(255,255,255,0.8);">
+                <a href="index.html" style="color:rgba(255,255,255,0.8)">Inicio</a> /
+                <a href="index.html#projects" style="color:rgba(255,255,255,0.8)">Proyectos</a> /
+                <span style="color:white">ChatBot de Agendamiento</span>
+            </div>
+            <div class="project-title-section">
+                <div style="font-size:4rem; margin-bottom:1rem;"><i class="fas fa-calendar-check"
+                        style="color:white"></i></div>
+                <h1 class="project-title" style="color:white">ChatBot de Agendamiento</h1>
+                <p class="project-subtitle" style="color:rgba(255,255,255,0.85)">
+                    Bot inteligente que agenda citas por WhatsApp, sincroniza con Google Calendar y envía recordatorios
+                    automáticos.
+                </p>
+                <div class="project-tech-stack">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Google Calendar API</span>
+                    <span class="tech-tag">Gemini AI</span>
+                    <span class="tech-tag">Google Sheets</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-content">
+        <div class="container">
+            <div class="project-layout">
+                <div class="project-description">
+                    <h2>Descripción del Proyecto</h2>
+                    <p>
+                        Sistema de agendamiento automático integrado con WhatsApp que permite a los clientes reservar
+                        citas de forma conversacional, sin formularios ni apps adicionales. El bot entiende lenguaje
+                        natural ("quiero una cita para el jueves a las 3") y verifica disponibilidad en tiempo real.
+                    </p>
+                    <p>
+                        Diseñado para clínicas, salones de belleza, consultorios, estudios y cualquier negocio basado en
+                        citas. Toda la agenda se sincroniza automáticamente con Google Calendar.
+                    </p>
+
+                    <h3>Características Principales</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Agenda citas en lenguaje natural via WhatsApp.</li>
+                        <li><i class="fas fa-check"></i> Verificación de disponibilidad en tiempo real desde Google
+                            Calendar.</li>
+                        <li><i class="fas fa-check"></i> Recordatorios automáticos 24h y 1h antes de la cita.</li>
+                        <li><i class="fas fa-check"></i> Posibilidad de cancelar o reprogramar desde WhatsApp.</li>
+                        <li><i class="fas fa-check"></i> Registro de atenciones en Google Sheets para seguimiento.</li>
+                        <li><i class="fas fa-check"></i> Soporte para múltiples profesionales o sucursales.</li>
+                        <li><i class="fas fa-check"></i> Confirmación automática con detalles de la cita por mensaje.
+                        </li>
+                    </ul>
+
+                    <h3>Integraciones</h3>
+                    <p>
+                        El sistema se conecta con <strong>Google Calendar</strong> para gestión de disponibilidad,
+                        <strong>Google Sheets</strong> para historial de citas, y usa <strong>Gemini AI</strong> para
+                        interpretar fechas relativas como "mañana", "la próxima semana", "el viernes por la tarde".
+                    </p>
+
+                    <h3>Resultados</h3>
+                    <p>
+                        Los negocios que implementan este sistema eliminan el 90% de las llamadas de agendamiento y
+                        reducen los "no shows" en un 55% gracias a los recordatorios automáticos por WhatsApp.
+                    </p>
+                </div>
+
+                <div class="project-images">
+                    <h2>Flujo de Agendamiento</h2>
+                    <div style="display:grid; gap:1.2rem; margin-top:1rem;">
+                        <div
+                            style="padding:1.5rem; background:#f8f9fa; border-radius:14px; border-left:4px solid #667eea; display:flex; gap:1rem; align-items:flex-start;">
+                            <i class="fab fa-whatsapp"
+                                style="color:#25D366; font-size:1.8rem; flex-shrink:0; margin-top:2px;"></i>
+                            <div>
+                                <strong>Cliente solicita cita por WhatsApp</strong>
+                                <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#666;">"Hola, quisiera una cita
+                                    para el miércoles por la tarde"</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:1.5rem; background:#f8f9fa; border-radius:14px; border-left:4px solid #667eea; display:flex; gap:1rem; align-items:flex-start;">
+                            <i class="fas fa-brain"
+                                style="color:#667eea; font-size:1.8rem; flex-shrink:0; margin-top:2px;"></i>
+                            <div>
+                                <strong>IA interpreta y valida disponibilidad</strong>
+                                <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#666;">El bot verifica el
+                                    calendario y ofrece horarios disponibles.</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:1.5rem; background:#f8f9fa; border-radius:14px; border-left:4px solid #43e97b; display:flex; gap:1rem; align-items:flex-start;">
+                            <i class="fas fa-calendar-plus"
+                                style="color:#43e97b; font-size:1.8rem; flex-shrink:0; margin-top:2px;"></i>
+                            <div>
+                                <strong>Cita confirmada y agendada</strong>
+                                <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#666;">Se crea el evento en Google
+                                    Calendar y se envía confirmación.</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:1.5rem; background:#f8f9fa; border-radius:14px; border-left:4px solid #f093fb; display:flex; gap:1rem; align-items:flex-start;">
+                            <i class="fas fa-bell"
+                                style="color:#f093fb; font-size:1.8rem; flex-shrink:0; margin-top:2px;"></i>
+                            <div>
+                                <strong>Recordatorios automáticos</strong>
+                                <p style="margin:0.3rem 0 0; font-size:0.9rem; color:#666;">24h y 1h antes, el bot envía
+                                    recordatorio al cliente por WhatsApp.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-actions">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="index.html#contact" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Solicitar este Proyecto
+                </a>
+                <a href="index.html#projects" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Volver a Proyectos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="footer-year"></span> Dev Sour. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/project.js"></script>
+</body>
+
+</html>
