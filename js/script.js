@@ -1,4 +1,31 @@
+// ============================================================
+// B — Sistema de Toast Notifications (reemplaza alert() nativo)
+// ============================================================
+function showToast(message, type = 'success') {
+    const existing = document.querySelector('.toast-notification');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = `toast-notification toast-${type}`;
+    toast.setAttribute('role', 'alert');
+    toast.setAttribute('aria-live', 'polite');
+
+    const icon = type === 'success' ? '✓' : '✕';
+    toast.innerHTML = `<span class="toast-icon">${icon}</span><span>${message}</span>`;
+    document.body.appendChild(toast);
+
+    // Trigger animation
+    requestAnimationFrame(() => toast.classList.add('toast-visible'));
+
+    // Auto remove after 4 seconds
+    setTimeout(() => {
+        toast.classList.remove('toast-visible');
+        setTimeout(() => toast.remove(), 400);
+    }, 4000);
+}
+
 // Mobile Navigation Toggle
+
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 
@@ -70,26 +97,26 @@ const contactForm = document.querySelector('#contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         // Get form data
         const formData = new FormData(contactForm);
         const name = formData.get('name');
         const email = formData.get('email');
         const message = formData.get('message');
-        
+
         // Simple validation
         if (!name || !email || !message) {
-            alert('Por favor, completa todos los campos.');
+            showToast('Por favor, completa todos los campos.', 'error');
             return;
         }
-        
+
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Por favor, ingresa una dirección de email válida.');
+            showToast('Por favor, ingresa una dirección de email válida.', 'error');
             return;
         }
-        
+
         // Save message to localStorage (simulating backend)
         const messages = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
         const newMessage = {
@@ -101,61 +128,48 @@ if (contactForm) {
             read: false,
             response: null
         };
-        
+
         messages.push(newMessage);
         localStorage.setItem('portfolio_messages', JSON.stringify(messages));
-        
-        // Show success message
-        alert('¡Gracias por tu mensaje! Te responderé pronto.');
-        
-        // Reset form
+
+        // B — Toast de éxito en lugar de alert()
+        showToast('¡Gracias por tu mensaje! Te responderé pronto.', 'success');
         contactForm.reset();
     });
 }
 
-// Typing animation for home title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
+// J — Año dinámico en el footer
+const footerYear = document.getElementById('footer-year');
+if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+// I — Scroll Spy: resalta el nav-link de la sección visible
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+
+const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+                if (link.getAttribute('href') === '#' + entry.target.id) {
+                    link.classList.add('active-link');
+                }
+            });
         }
-    }
-    
-    type();
-}
+    });
+}, { rootMargin: '-40% 0px -55% 0px' });
 
-// Initialize typing animation when page loads
-window.addEventListener('load', () => {
-    const homeTitle = document.querySelector('.home-title');
-    if (homeTitle) {
-        const originalText = homeTitle.textContent;
-        typeWriter(homeTitle, originalText, 50);
-    }
-});
+sections.forEach(section => spyObserver.observe(section));
 
-// Parallax effect for home section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const homeSection = document.querySelector('.home');
-    const profileCard = document.querySelector('.profile-card');
-    
-    if (homeSection && profileCard) {
-        const rate = scrolled * -0.5;
-        profileCard.style.transform = `translateY(${rate}px)`;
-    }
-});
+// M — Eliminado parallax de JS (conflictía con la animación CSS float del profile-card)
+// El efecto float ahora es controlado únicamente por el @keyframes float del CSS.
 
 // Add hover effects to project cards
 document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-10px) scale(1.02)';
     });
-    
+
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0) scale(1)';
     });
@@ -163,21 +177,21 @@ document.querySelectorAll('.project-card').forEach(card => {
 
 // Add click animation to buttons
 document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
+    btn.addEventListener('click', function (e) {
         // Create ripple effect
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
-        
+
         ripple.style.width = ripple.style.height = size + 'px';
         ripple.style.left = x + 'px';
         ripple.style.top = y + 'px';
         ripple.classList.add('ripple');
-        
+
         this.appendChild(ripple);
-        
+
         setTimeout(() => {
             ripple.remove();
         }, 600);
@@ -245,7 +259,7 @@ document.head.appendChild(loadingStyle);
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16);
-    
+
     function updateCounter() {
         start += increment;
         if (start < target) {
@@ -255,7 +269,7 @@ function animateCounter(element, target, duration = 2000) {
             element.textContent = target;
         }
     }
-    
+
     updateCounter();
 }
 
@@ -281,8 +295,8 @@ window.addEventListener('scroll', () => {
 });
 
 // Add fade-in animation to sections
-const sections = document.querySelectorAll('section');
-sections.forEach(section => {
+const allSections = document.querySelectorAll('section');
+allSections.forEach(section => {
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -290,7 +304,7 @@ sections.forEach(section => {
             }
         });
     }, { threshold: 0.1 });
-    
+
     sectionObserver.observe(section);
 });
 
@@ -314,3 +328,76 @@ sectionFadeStyle.textContent = `
     }
 `;
 document.head.appendChild(sectionFadeStyle);
+
+// ============================================================
+// C — Dark Mode Toggle
+// ============================================================
+(function initDarkMode() {
+    const html = document.documentElement;
+    const btn = document.getElementById('dark-toggle');
+    const icon = document.getElementById('dark-icon');
+
+    function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('portfolio-theme', theme);
+        if (icon) {
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        if (btn) {
+            btn.setAttribute('aria-label', theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+        }
+    }
+
+    // Restore saved preference or system preference
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved) {
+        applyTheme(saved);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        applyTheme('dark');
+    }
+
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            applyTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    }
+})();
+
+// ============================================================
+// E+K — Contador animado para las Stat Cards
+// ============================================================
+function animateStatCounter(el) {
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const duration = 1800;
+    const start = performance.now();
+
+    function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Easing: ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+}
+
+const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const nums = entry.target.querySelectorAll('.stat-number');
+            nums.forEach(num => {
+                if (!num.dataset.animated) {
+                    num.dataset.animated = 'true';
+                    animateStatCounter(num);
+                }
+            });
+            statObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.4 });
+
+const statsStrip = document.querySelector('.stats-strip');
+if (statsStrip) statObserver.observe(statsStrip);
